@@ -1,0 +1,93 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Full Name</ion-label>
+        <ion-input
+          type="text"
+          name="fullName"
+          [(ngModel)]="fullName"
+          required
+          #fullNameInput="ngModel">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="fullNameInput.invalid && fullNameInput.touched">
+        <p class="ion-padding-start">Full name is required</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          required
+          #emailInput="ngModel">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="emailInput.invalid && emailInput.touched">
+        <p class="ion-padding-start">Valid email is required</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          required
+          minlength="6"
+          #passwordInput="ngModel">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="passwordInput.invalid && passwordInput.touched">
+        <p class="ion-padding-start">Password must be at least 6 characters</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Confirm Password</ion-label>
+        <ion-input
+          type="password"
+          name="confirmPassword"
+          [(ngModel)]="confirmPassword"
+          required
+          #confirmPasswordInput="ngModel">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="confirmPasswordInput.touched && password !== confirmPassword">
+        <p class="ion-padding-start">Passwords do not match</p>
+      </ion-text>
+
+      <!-- ✅ Assign Role Dropdown -->
+      <ion-item>
+        <ion-label position="floating">Assign Role</ion-label>
+        <ion-select
+          name="role"
+          [(ngModel)]="role"
+          required
+          #roleInput="ngModel">
+          <ion-select-option value="Admin">Admin</ion-select-option>
+          <ion-select-option value="Security Personnel">Security Personnel</ion-select-option>
+          <ion-select-option value="Law Enforcement Officer">Law Enforcement Officer</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-text color="danger" *ngIf="roleInput.invalid && roleInput.touched">
+        <p class="ion-padding-start">Role is required</p>
+      </ion-text>
+    </ion-list>
+
+    <ion-button
+      expand="block"
+      type="submit"
+      [disabled]="registerForm.invalid || password !== confirmPassword"
+      class="ion-margin-top">
+      Register
+    </ion-button>
+  </form>
+</ion-content>

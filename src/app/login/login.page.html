@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  
+</ion-header>
+
+<ion-content class="login-screen ion-padding">
+  <div class="login-container">
+
+    <h1 class="login-title">Login</h1>
+    <p class="login-subtitle">Access your drone dashboard</p>
+
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+
+      <!-- Email -->
+      <ion-item lines="none">
+        <ion-input
+          class="login-input"
+          placeholder="Email"
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          required
+          #emailInput="ngModel">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="emailInput.invalid && emailInput.touched">
+        <p class="ion-padding-start">Email is required</p>
+      </ion-text>
+
+      <!-- Password -->
+      <ion-item lines="none">
+        <ion-input
+          class="login-input"
+          placeholder="Password"
+          [type]="showPassword ? 'text' : 'password'"
+          name="password"
+          [(ngModel)]="password"
+          required
+          minlength="6"
+          #passwordInput="ngModel">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="passwordInput.invalid && passwordInput.touched">
+        <p class="ion-padding-start">Password is required (min 6 characters)</p>
+      </ion-text>
+
+      <!-- Login Button -->
+      <ion-button
+        expand="block"
+        class="login-button"
+        shape="round"
+        type="submit"
+        [disabled]="loginForm.invalid">
+        Sign In
+      </ion-button>
+
+      <!-- Forgot Password Link -->
+      <div class="ion-text-center ion-margin-top">
+        <a [routerLink]="['/forgot-password']">Forgot Password?</a>
+      </div>
+
+    </form>
+  </div>
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "DS3_Project",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
