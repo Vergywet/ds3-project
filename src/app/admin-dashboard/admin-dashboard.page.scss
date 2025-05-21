@@ -1,0 +1,38 @@
+.icon-center {
+  text-align: center;
+  margin: 30px 0 20px;
+}
+
+.app-title {
+  margin-top: 10px;
+  color: #007bff;
+  font-size: 20px;
+}
+
+.menu-card {
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-left h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.card-left p {
+  margin: 5px 0 0;
+  color: gray;
+  font-size: 14px;
+}
+
+.footer-text {
+  margin-top: 30px;
+  color: gray;
+  font-size: 12px;
+}

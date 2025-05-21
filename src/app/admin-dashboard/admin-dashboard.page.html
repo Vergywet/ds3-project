@@ -1,13 +1,69 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>admin-dashboard</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Admin Home</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger">Logout</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">admin-dashboard</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- content unchanged -->
+  <div class="icon-center">
+    <ion-icon name="lock-closed-outline" size="large" color="primary"></ion-icon>
+    <h2 class="app-title">Drone Security App</h2>
+  </div>
+
+  <ion-list lines="none" class="menu-list">
+
+    <ion-card class="menu-card" button>
+      <ion-card-content class="card-content">
+        <div class="card-left">
+          <h2>Manage Users</h2>
+          <p>Add, edit, delete or lock account.</p>
+        </div>
+        <ion-icon name="chevron-forward-outline" color="medium"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="menu-card" button>
+      <ion-card-content class="card-content">
+        <div class="card-left">
+          <h2>Manage Reports</h2>
+          <p>View and generate security reports..</p>
+        </div>
+        <ion-icon name="chevron-forward-outline" color="medium"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="menu-card" button>
+      <ion-card-content class="card-content">
+        <div class="card-left">
+          <h2>Alerts Overview</h2>
+          <p>Review recent threat detections.</p>
+        </div>
+        <ion-icon name="chevron-forward-outline" color="medium"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="menu-card" button>
+      <ion-card-content class="card-content">
+        <div class="card-left">
+          <h2>System Settings</h2>
+          <p>Configure system preferences.</p>
+        </div>
+        <ion-icon name="chevron-forward-outline" color="medium"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+
+  <div class="footer-text ion-text-center">
+    <small>Predictive Minds © 2025</small>
+  </div>
 </ion-content>

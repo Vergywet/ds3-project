@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -8,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDashboardPage implements OnInit {
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit() {
   }
 
+  goBack() {
+    this.location.back();
+  }
 }
