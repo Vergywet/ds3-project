@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Manage Users</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="logout()">Logout</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="users$ | async as users">
+    <ion-item *ngFor="let user of users">
+      <ion-label>
+        <h2>{{ user.fullName }}</h2>
+        <p>{{ user.role }}</p>
+      </ion-label>
+
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="editUser(user)">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" (click)="toggleLock(user)">
+          <ion-icon slot="icon-only" [name]="user.role === 'Locked' ? 'lock-closed-outline' : 'lock-open-outline'"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="danger" (click)="deleteUser(user)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/register">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

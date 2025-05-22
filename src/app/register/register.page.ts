@@ -21,7 +21,7 @@ export class RegisterPage implements OnInit {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
-  role: string = ''; // ✅ Added role
+  role: string = ''; 
 
   constructor(
     private afAuth: AngularFireAuth,

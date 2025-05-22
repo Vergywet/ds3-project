@@ -36,12 +36,16 @@ const routes: Routes = [
     loadChildren: () => import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
   },
   {
-    path: '**',
-    redirectTo: 'home'
+    path: 'manage-users',
+    loadChildren: () => import('./manage-users/manage-users.module').then(m => m.ManageUsersPageModule)
   },
   {
     path: 'live-feeds',
-    loadChildren: () => import('./live-feeds/live-feeds.module').then( m => m.LiveFeedsPageModule)
+    loadChildren: () => import('./live-feeds/live-feeds.module').then(m => m.LiveFeedsPageModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'home'
   }
 ];
 
