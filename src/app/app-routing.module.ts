@@ -38,6 +38,10 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: 'home'
+  },
+  {
+    path: 'live-feeds',
+    loadChildren: () => import('./live-feeds/live-feeds.module').then( m => m.LiveFeedsPageModule)
   }
 ];
 

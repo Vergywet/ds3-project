@@ -1,1 +1,0 @@
-This is initial version of ReadMe.md and will be updated along the development.

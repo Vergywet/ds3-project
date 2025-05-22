@@ -1,33 +1,35 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Security Personnel</ion-title>
+    <ion-title class="ion-text-center">Security Home</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="danger" (click)="logout()">
+      <ion-button fill="solid" color="danger" (click)="logout()">
         Logout
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <div class="icon-center">
-    <ion-icon name="shield-outline" size="large" color="primary"></ion-icon>
-  </div>
+<ion-content class="ion-padding">
 
-  <ion-list>
-    <ion-card *ngFor="let item of menuItems" (click)="navigateTo(item)">
-      <ion-card-content class="dashboard-card">
-        <ion-icon [name]="item.icon" [color]="item.color" class="dashboard-icon"></ion-icon>
-        <div class="dashboard-text">
-          <h2>{{ item.title }}</h2>
-          <p>{{ item.description }}</p>
+  <div class="menu-container">
+
+    <ion-card class="menu-card" *ngFor="let item of menuItems" (click)="navigateTo(item.route)">
+      <ion-card-content class="menu-item">
+        <div class="icon-title">
+          <ion-icon [name]="item.icon" size="large" color="primary"></ion-icon>
+          <div class="text-container">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </div>
         </div>
-        <ion-icon name="chevron-forward-outline" color="medium"></ion-icon>
+        <ion-icon name="chevron-forward-outline" size="large" color="medium"></ion-icon>
       </ion-card-content>
     </ion-card>
-  </ion-list>
 
-  <div class="footer-text ion-text-center">
-    <small>Predictive Minds © 2025</small>
   </div>
+
+  <div class="footer">
+    Predictive Minds © 2025
+  </div>
+
 </ion-content>

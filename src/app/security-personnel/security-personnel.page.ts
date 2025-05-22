@@ -11,28 +11,37 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class SecurityPersonnelPage implements OnInit {
 
   menuItems = [
-    {
-      title: 'Visitor Logs',
-      description: 'Track and review visitor entries and exits',
-      icon: 'people-outline',
-      color: 'primary',
-      route: '/security-personnel/visitors'
-    },
-    {
-      title: 'Patrol Schedules',
-      description: 'View assigned patrol schedules and locations',
-      icon: 'walk-outline',
-      color: 'secondary',
-      route: '/security-personnel/patrols'
-    },
-    {
-      title: 'Incident Alerts',
-      description: 'Receive and respond to nearby incidents',
-      icon: 'alert-circle-outline',
-      color: 'danger',
-      route: '/security-personnel/alerts'
-    }
-  ];
+  {
+    title: 'Live Feeds & Control Panel',
+    description: 'Monitor and control drone operations',
+    icon: 'videocam',
+    route: '/live-feeds'
+  },
+  {
+    title: 'Threats Detected',
+    description: 'Monitor detected suspicious activities',
+    icon: 'alert',
+    route: '/threats'
+  },
+  {
+    title: 'Communicate with Law Enforcement',
+    description: 'Send updates or urgent requests',
+    icon: 'call',
+    route: '/communicate'
+  },
+  {
+    title: 'Generate Reports',
+    description: 'Create detailed incident reports',
+    icon: 'document-text',
+    route: '/reports'
+  },
+  {
+    title: 'System Settings',
+    description: 'Change language, theme, or preferences',
+    icon: 'settings',
+    route: '/settings'
+  }
+];
 
   constructor(
     private router: Router,
