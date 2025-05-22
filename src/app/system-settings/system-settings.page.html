@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>System Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-text color="medium"><h5>Account Settings</h5></ion-text>
+
+  <ion-card>
+  <ion-item button [routerLink]="['/change-password']">
+    <ion-label>Change Password</ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+</ion-card>
+
+
+  <ion-card>
+    <ion-item button>
+      <ion-label>Notification Settings</ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+  </ion-card>
+
+  <ion-text color="medium"><h5>App Preferences</h5></ion-text>
+
+  <ion-card>
+    <ion-item>
+      <ion-label>Language</ion-label>
+      <ion-select [(ngModel)]="language" interface="popover">
+        <ion-select-option value="en">English</ion-select-option>
+        <ion-select-option value="es">Spanish</ion-select-option>
+        <ion-select-option value="fr">French</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label>Theme Mode</ion-label>
+      <ion-button fill="outline" size="small" (click)="toggleTheme()">
+        {{ themeMode === 'light' ? 'Light Mode' : 'Dark Mode' }}
+      </ion-button>
+    </ion-item>
+  </ion-card>
+
+  <div class="footer-text">
+    <ion-text color="medium">Predictive Minds © 2025</ion-text>
+  </div>
+
+</ion-content>

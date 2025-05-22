@@ -8,6 +8,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'system-settings',
+    loadChildren: () => import('./system-settings/system-settings.module').then( m => m.SystemSettingsPageModule)
+  },
+  {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
@@ -35,6 +39,7 @@ const routes: Routes = [
     path: 'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
   },
+   
   {
     path: '**',
     redirectTo: 'home'
@@ -42,7 +47,8 @@ const routes: Routes = [
   {
     path: 'live-feeds',
     loadChildren: () => import('./live-feeds/live-feeds.module').then( m => m.LiveFeedsPageModule)
-  }
+  },
+ 
 ];
 
 @NgModule({
