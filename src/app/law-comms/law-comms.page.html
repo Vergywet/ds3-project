@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/law-dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Secure Communication</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <!-- Officer Card -->
+  <ion-card class="officer-card">
+    <ion-item lines="none">
+      <ion-avatar slot="start">
+        <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Officer" />
+      </ion-avatar>
+      <ion-label>
+        <h2>Officer M. Dlamini</h2>
+        <p class="status">Active Now</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" color="dark">
+          <ion-icon name="call-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="dark">
+          <ion-icon name="videocam-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-card>
+
+  <!-- Messages -->
+  <div class="chat-window">
+    <div *ngFor="let msg of messages" [ngClass]="msg.sender === 'self' ? 'msg msg-sent' : 'msg msg-received'">
+      <p>{{ msg.text }}</p>
+    </div>
+  </div>
+</ion-content>
+
+<!-- Footer Input -->
+<ion-footer class="footer-bar">
+  <ion-item class="msg-input" lines="none">
+    <ion-textarea
+      [(ngModel)]="inputMessage"
+      placeholder="Type a message..."
+      rows="1"
+      auto-grow="true"
+    ></ion-textarea>
+    <ion-button fill="solid" color="primary" shape="round" (click)="sendMessage()">
+      <ion-icon slot="icon-only" name="send-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-footer>
