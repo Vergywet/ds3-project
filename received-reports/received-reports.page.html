@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/law-dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Received Reports</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-padding>
+    <ion-searchbar
+      [(ngModel)]="searchText"
+      placeholder="Search reports..."
+      showCancelButton="focus"
+    ></ion-searchbar>
+
+    <ion-list *ngIf="filteredReports.length > 0">
+      <ion-card *ngFor="let report of filteredReports">
+        <ion-card-header>
+          <ion-card-title>
+            {{ report.title }}
+            <ion-badge slot="end" [color]="getStatusColor(report.status)">
+              {{ report.status }}
+            </ion-badge>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Date: {{ report.date }}
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+
+    <div *ngIf="filteredReports.length === 0" class="ion-text-center">
+      <p>No reports found.</p>
+    </div>
+  </ion-padding>
+
+  <ion-footer class="ion-text-center ion-padding">
+    <small class="ion-text-color-medium">Predictive Minds © 2025</small>
+  </ion-footer>
+</ion-content>
