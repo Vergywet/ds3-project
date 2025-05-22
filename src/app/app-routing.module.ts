@@ -62,14 +62,13 @@ const routes: Routes = [
   },
    
   {
-    path: '**',
-    redirectTo: 'home'
+    path: 'manage-users',
+    loadChildren: () => import('./manage-users/manage-users.module').then(m => m.ManageUsersPageModule)
   },
   {
     path: 'live-feeds',
     loadChildren: () => import('./live-feeds/live-feeds.module').then( m => m.LiveFeedsPageModule)
-  },
-
+  }
 ];
 
 @NgModule({

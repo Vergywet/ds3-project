@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/manage-users"></ion-back-button>
+    </ion-buttons>
     <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -7,6 +10,7 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <form (ngSubmit)="onRegister()" #registerForm="ngForm">
     <ion-list>
+      <!-- Full Name -->
       <ion-item>
         <ion-label position="floating">Full Name</ion-label>
         <ion-input
@@ -21,6 +25,7 @@
         <p class="ion-padding-start">Full name is required</p>
       </ion-text>
 
+      <!-- Email -->
       <ion-item>
         <ion-label position="floating">Email</ion-label>
         <ion-input
@@ -35,6 +40,7 @@
         <p class="ion-padding-start">Valid email is required</p>
       </ion-text>
 
+      <!-- Password -->
       <ion-item>
         <ion-label position="floating">Password</ion-label>
         <ion-input
@@ -50,6 +56,7 @@
         <p class="ion-padding-start">Password must be at least 6 characters</p>
       </ion-text>
 
+      <!-- Confirm Password -->
       <ion-item>
         <ion-label position="floating">Confirm Password</ion-label>
         <ion-input
@@ -64,7 +71,7 @@
         <p class="ion-padding-start">Passwords do not match</p>
       </ion-text>
 
-      <!-- ✅ Assign Role Dropdown -->
+      <!-- Role Selection -->
       <ion-item>
         <ion-label position="floating">Assign Role</ion-label>
         <ion-select

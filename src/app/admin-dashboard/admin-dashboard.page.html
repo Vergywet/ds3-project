@@ -7,13 +7,12 @@
     </ion-buttons>
     <ion-title class="ion-text-center">Admin Home</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="danger">Logout</ion-button>
+      <ion-button (click)="logout()" color="danger">Logout</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <!-- content unchanged -->
   <div class="icon-center">
     <ion-icon name="lock-closed-outline" size="large" color="primary"></ion-icon>
     <h2 class="app-title">Drone Security App</h2>
@@ -21,7 +20,7 @@
 
   <ion-list lines="none" class="menu-list">
 
-    <ion-card class="menu-card" button>
+    <ion-card class="menu-card" button routerLink="/manage-users">
       <ion-card-content class="card-content">
         <div class="card-left">
           <h2>Manage Users</h2>
@@ -31,17 +30,17 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-card class="menu-card" button>
+    <ion-card class="menu-card" button routerLink="/reports">
       <ion-card-content class="card-content">
         <div class="card-left">
           <h2>Manage Reports</h2>
-          <p>View and generate security reports..</p>
+          <p>View and generate security reports.</p>
         </div>
         <ion-icon name="chevron-forward-outline" color="medium"></ion-icon>
       </ion-card-content>
     </ion-card>
 
-    <ion-card class="menu-card" button>
+    <ion-card class="menu-card" button routerLink="/alerts">
       <ion-card-content class="card-content">
         <div class="card-left">
           <h2>Alerts Overview</h2>
@@ -51,7 +50,7 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-card class="menu-card" button>
+    <ion-card class="menu-card" button routerLink="/settings">
       <ion-card-content class="card-content">
         <div class="card-left">
           <h2>System Settings</h2>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -9,12 +11,25 @@ import { Location } from '@angular/common';
 })
 export class AdminDashboardPage implements OnInit {
 
-  constructor(private location: Location) { }
+  constructor(
+    private location: Location,
+    private afAuth: AngularFireAuth,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
   goBack() {
     this.location.back();
+  }
+
+  async logout() {
+    try {
+      await this.afAuth.signOut();
+      await this.router.navigate(['/login']);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   }
 }
