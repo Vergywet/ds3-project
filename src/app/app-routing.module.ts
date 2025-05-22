@@ -8,8 +8,29 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'system-settings',
-    loadChildren: () => import('./system-settings/system-settings.module').then( m => m.SystemSettingsPageModule)
+    path: 'change-password',
+    loadChildren: () => import('./change-password/change-password.module').then( m => m.ChangePasswordPageModule)
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
+  },
+  {
+    path: 'terms-of-service',
+    loadChildren: () => import('./terms-of-service/terms-of-service.module').then( m => m.TermsOfServicePageModule)
+  },
+  {
+    path: 'notification',
+    loadChildren: () => import('./notification/notification.module').then( m => m.NotificationPageModule)
+  },
+  {
+  path: 'system-settings',
+  loadChildren: () =>
+    import('./system-settings/system-settings.module').then(m => m.SystemSettingsPageModule)
+ },
+  {
+    path: 'privacy-policy',
+    loadChildren: () => import('./privacy-policy/privacy-policy.module').then( m => m.PrivacyPolicyPageModule)
   },
   {
     path: 'home',
@@ -48,7 +69,7 @@ const routes: Routes = [
     path: 'live-feeds',
     loadChildren: () => import('./live-feeds/live-feeds.module').then( m => m.LiveFeedsPageModule)
   },
- 
+
 ];
 
 @NgModule({

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/system-settings"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-list>
+    <ion-item *ngFor="let notification of notifications" [class.read]="notification.read">
+      <ion-avatar slot="start">
+        <ion-icon [name]="notification.icon" size="large"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ notification.title }}</h2>
+        <p>{{ notification.message }}</p>
+        <ion-text color="medium" class="small">{{ notification.time }}</ion-text>
+      </ion-label>
+      <ion-button fill="clear" size="small" (click)="markAsRead(notification)" *ngIf="!notification.read">
+        Mark as read
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="danger" (click)="clearAll()">
+    Clear All Notifications
+  </ion-button>
+
+</ion-content>

@@ -13,7 +13,7 @@
 
   <div class="menu-container">
 
-    <ion-card class="menu-card" *ngFor="let item of menuItems" (click)="navigateTo(item.route)">
+    <ion-card class="menu-card" *ngFor="let item of menuItems" (click)="navigateTo(item)">
       <ion-card-content class="menu-item">
         <div class="icon-title">
           <ion-icon [name]="item.icon" size="large" color="primary"></ion-icon>
