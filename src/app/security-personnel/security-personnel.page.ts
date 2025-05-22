@@ -39,7 +39,7 @@ export class SecurityPersonnelPage implements OnInit {
     title: 'System Settings',
     description: 'Change language, theme, or preferences',
     icon: 'settings',
-    route: '/settings'
+    route: '/system-settings'
   }
 ];
 
