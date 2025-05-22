@@ -11,9 +11,6 @@
 
 <ion-content [fullscreen]="true" class="ion-padding custom-content">
   <div class="white-container">
-    <div class="icon-center">
-      <ion-icon name="person-circle-outline" size="large" color="primary"></ion-icon>
-    </div>
 
     <ion-list>
       <ion-card *ngFor="let item of menuItems" (click)="navigateTo(item)" class="dashboard-card">
