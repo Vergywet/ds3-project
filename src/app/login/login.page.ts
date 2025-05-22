@@ -12,8 +12,6 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
   email: string = '';
   password: string = '';
-
-  // ✅ Controls password visibility in the template
   showPassword: boolean = false;
 
   constructor(
@@ -26,7 +24,6 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
- // ✅ Toggle password field visibility
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
@@ -48,28 +45,57 @@ export class LoginPage implements OnInit {
 
         if (userData?.role) {
           const role = userData.role;
-          alert(`Login successful as ${role}`);
 
+          // Check if account is locked
+          if (role === 'Locked') {
+            alert('Your account has been locked');
+            await this.afAuth.signOut();
+            return;
+          }
+
+          // Handle successful login based on role
           switch (role) {
             case 'Admin':
-              this.router.navigateByUrl('/admin-dashboard', { replaceUrl: true });
+              await this.router.navigateByUrl('/admin-dashboard', { replaceUrl: true });
               break;
             case 'Security Personnel':
-              this.router.navigateByUrl('/security-personnel', { replaceUrl: true });
+              await this.router.navigateByUrl('/security-personnel', { replaceUrl: true });
               break;
             case 'Law Enforcement Officer':
-              this.router.navigateByUrl('/law-dashboard', { replaceUrl: true });
+              await this.router.navigateByUrl('/law-dashboard', { replaceUrl: true });
               break;
             default:
               alert('Unknown role. Please contact the administrator.');
+              await this.afAuth.signOut();
+              return;
           }
+
+          // Show success message only after navigation
+          alert(`Login successful as ${role}`);
         } else {
           alert('User role not found.');
+          await this.afAuth.signOut();
         }
       });
     } catch (error: any) {
       console.error('Login error:', error);
-      alert(error.message);
+
+      // Handle specific error cases
+      if (error.code === 'auth/user-not-found') {
+        alert('User not found. Please check your email.');
+      } else if (error.code === 'auth/wrong-password') {
+        alert('Incorrect password. Please try again.');
+      } else {
+        alert(error.message);
+      }
     }
+  }
+
+  async goToForgotPassword() {
+    await this.router.navigate(['/forgot-password']);
+  }
+
+  async goToRegister() {
+    await this.router.navigate(['/register']);
   }
 }
