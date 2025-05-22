@@ -45,6 +45,50 @@ export class ManageUsersPage implements OnInit {
     });
   }
 
+  async toggleLock(user: User) {
+    const isCurrentlyLocked = user.role === 'Locked';
+    try {
+      const confirmAlert = await this.alertController.create({
+        header: isCurrentlyLocked ? 'Unlock Account' : 'Lock Account',
+        message: `Are you sure you want to ${isCurrentlyLocked ? 'unlock' : 'lock'} this account?`,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel'
+          },
+          {
+            text: 'Confirm',
+            handler: async () => {
+              try {
+                await runInInjectionContext(this.injector, async () => {
+                  const previousRole = localStorage.getItem(`previousRole_${user.id}`) || 'User';
+                  if (!isCurrentlyLocked) {
+                    // Store current role before locking
+                    localStorage.setItem(`previousRole_${user.id}`, user.role);
+                  }
+                  await this.firestore.collection('users').doc(user.id).update({
+                    role: isCurrentlyLocked ? previousRole : 'Locked'
+                  });
+                });
+                await this.showAlert(
+                  'Success', 
+                  `Account has been ${isCurrentlyLocked ? 'unlocked' : 'locked'}`
+                );
+              } catch (error) {
+                console.error('Error toggling lock:', error);
+                await this.showAlert('Error', 'Failed to update account status');
+              }
+            }
+          }
+        ]
+      });
+      await confirmAlert.present();
+    } catch (error) {
+      console.error('Error showing confirmation:', error);
+      await this.showAlert('Error', 'Failed to process request');
+    }
+  }
+
   async editUser(user: User) {
     const alert = await this.alertController.create({
       header: 'Edit User',
@@ -77,28 +121,16 @@ export class ManageUsersPage implements OnInit {
                   role: data.role
                 });
               });
+              await this.showAlert('Success', 'User updated successfully');
             } catch (error) {
               console.error('Error updating user:', error);
-              this.showAlert('Error', 'Failed to update user');
+              await this.showAlert('Error', 'Failed to update user');
             }
           }
         }
       ]
     });
     await alert.present();
-  }
-
-  async toggleLock(user: User) {
-    try {
-      await runInInjectionContext(this.injector, async () => {
-        const isLocked = user.role === 'Locked';
-        const newRole = isLocked ? 'User' : 'Locked';
-        await this.firestore.collection('users').doc(user.id).update({ role: newRole });
-      });
-    } catch (error) {
-      console.error('Error toggling lock:', error);
-      this.showAlert('Error', 'Failed to update user status');
-    }
   }
 
   async deleteUser(user: User) {
@@ -116,10 +148,12 @@ export class ManageUsersPage implements OnInit {
             try {
               await runInInjectionContext(this.injector, async () => {
                 await this.firestore.collection('users').doc(user.id).delete();
+                localStorage.removeItem(`previousRole_${user.id}`);
               });
+              await this.showAlert('Success', 'User deleted successfully');
             } catch (error) {
               console.error('Error deleting user:', error);
-              this.showAlert('Error', 'Failed to delete user');
+              await this.showAlert('Error', 'Failed to delete user');
             }
           }
         }
@@ -136,7 +170,7 @@ export class ManageUsersPage implements OnInit {
       });
     } catch (error) {
       console.error('Logout error:', error);
-      this.showAlert('Error', 'Failed to logout');
+      await this.showAlert('Error', 'Failed to logout');
     }
   }
 
