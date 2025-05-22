@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/law-dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Threats Detected</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" color="light">
+  <ion-card *ngFor="let threat of threatData">
+    <ion-card-header>
+      <ion-card-title class="ion-text-wrap">
+        <div class="card-title-row">
+          <span>{{ threat.title }}</span>
+          <ion-badge [color]="threat.statusColor" [style.color]="threat.textColor">
+            {{ threat.status }}
+          </ion-badge>
+        </div>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p><strong>Location:</strong> {{ threat.location }}</p>
+      <p><strong>Time:</strong> {{ threat.time }}</p>
+      <div class="button-row">
+        <ion-button size="small" color="primary" (click)="confirmThreat(threat.title)">
+          Confirm
+        </ion-button>
+        <ion-button size="small" color="danger" (click)="dismissThreat(threat.title)">
+          Dismiss
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-footer class="ion-text-center">
+    <p class="footer-text">Predictive Minds © 2025</p>
+  </ion-footer>
+</ion-content>
