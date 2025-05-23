@@ -68,7 +68,11 @@ const routes: Routes = [
   {
     path: 'live-feeds',
     loadChildren: () => import('./live-feeds/live-feeds.module').then( m => m.LiveFeedsPageModule)
+  },  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   }
+
 ];
 
 @NgModule({

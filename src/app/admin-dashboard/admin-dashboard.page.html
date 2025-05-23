@@ -13,7 +13,7 @@
       <ion-popover trigger="profile-trigger" [dismissOnSelect]="true">
         <ng-template>
           <ion-list>
-            <ion-item button (click)="viewProfile()">
+            <ion-item button routerLink="/profile">
               <ion-icon slot="start" name="person-outline"></ion-icon>
               <ion-label>Profile</ion-label>
             </ion-item>
@@ -70,6 +70,16 @@
         <div class="card-left">
           <h2>System Settings</h2>
           <p>Configure system preferences.</p>
+        </div>
+        <ion-icon name="chevron-forward-outline" color="medium"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="menu-card" button routerLink="/live-feeds">
+      <ion-card-content class="card-content">
+        <div class="card-left">
+          <h2>Live Feeds</h2>
+          <p>View real-time drone footage.</p>
         </div>
         <ion-icon name="chevron-forward-outline" color="medium"></ion-icon>
       </ion-card-content>
