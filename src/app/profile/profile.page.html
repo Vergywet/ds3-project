@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>My Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Show spinner while loading -->
+  <ng-container *ngIf="loading; else showForm">
+    <ion-spinner name="dots"></ion-spinner>
+    <p>Loading your profile...</p>
+  </ng-container>
+
+  <!-- Show form after loading -->
+  <ng-template #showForm>
+    <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+      <ion-item>
+        <ion-label position="floating">Full Name</ion-label>
+        <ion-input formControlName="fullname"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" readonly></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" [disabled]="profileForm.invalid">
+        Save Changes
+      </ion-button>
+    </form>
+
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Current Password</ion-label>
+        <ion-input type="password" [(ngModel)]="currentPassword" name="currentPassword"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">New Password</ion-label>
+        <ion-input type="password" [(ngModel)]="newPassword" name="newPassword"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Confirm New Password</ion-label>
+        <ion-input type="password" [(ngModel)]="confirmPassword" name="confirmPassword"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" (click)="changePassword()">Change Password</ion-button>
+  </ng-template>
+
+</ion-content>
