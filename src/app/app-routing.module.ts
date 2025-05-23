@@ -7,6 +7,11 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+    {
+  path: 'system-settings',
+  loadChildren: () =>
+    import('./system-settings/system-settings.module').then(m => m.SystemSettingsPageModule)
+ },
   {
     path: 'change-password',
     loadChildren: () => import('./change-password/change-password.module').then( m => m.ChangePasswordPageModule)
@@ -23,11 +28,6 @@ const routes: Routes = [
     path: 'notification',
     loadChildren: () => import('./notification/notification.module').then( m => m.NotificationPageModule)
   },
-  {
-  path: 'system-settings',
-  loadChildren: () =>
-    import('./system-settings/system-settings.module').then(m => m.SystemSettingsPageModule)
- },
   {
     path: 'privacy-policy',
     loadChildren: () => import('./privacy-policy/privacy-policy.module').then( m => m.PrivacyPolicyPageModule)
