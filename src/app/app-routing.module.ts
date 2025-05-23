@@ -11,7 +11,10 @@ const routes: Routes = [
   path: 'system-settings',
   loadChildren: () =>
     import('./system-settings/system-settings.module').then(m => m.SystemSettingsPageModule)
- },
+ }, {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
   {
     path: 'change-password',
     loadChildren: () => import('./change-password/change-password.module').then( m => m.ChangePasswordPageModule)
@@ -68,12 +71,12 @@ const routes: Routes = [
   {
     path: 'live-feeds',
     loadChildren: () => import('./live-feeds/live-feeds.module').then( m => m.LiveFeedsPageModule)
-  },  {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   }
 
 ];
+
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
