@@ -68,8 +68,28 @@ const routes: Routes = [
   {
     path: 'live-feeds',
     loadChildren: () => import('./live-feeds/live-feeds.module').then( m => m.LiveFeedsPageModule)
+  },
+  
+  {
+    path: 'law-comms',
+    loadChildren: () => import('./law-comms/law-comms.module').then(m => m.LawCommsPageModule)
+  },
+  {
+    path: 'received-reports',
+    loadChildren: () => import('./received-reports/received-reports.module').then(m => m.ReceivedReportsPageModule)
+  },
+  {
+    path: 'threats-detected',
+    loadChildren: () => import('./threats-detected/threats-detected.module').then(m => m.ThreatsDetectedPageModule)
+  },
+  {
+    path: 'generate-reports',
+    loadChildren: () => import('./generate-reports/generate-reports.module').then(m => m.GenerateReportsPageModule)
   }
 ];
+
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
