@@ -1,0 +1,48 @@
+:host {
+  ion-content {
+    background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%) !important;
+    min-height: 100vh;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+}
+.icon-center {
+  text-align: center;
+  margin: 24px 0;
+  font-size: 64px;
+}
+
+.dashboard-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgb(255, 255, 255);
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
+}
+
+.dashboard-card:hover {
+  box-shadow: 0 4px 16px rgb(248, 248, 248);
+}
+
+.dashboard-icon {
+  font-size: 28px;
+}
+
+.dashboard-text h2 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.dashboard-text p {
+  font-size: 13px;
+  color: #ffffff;
+  margin-top: 4px;
+}
+
+.footer-text {
+  margin-top: 24px;
+  color: #ffffff;
+  font-style: italic;
+}
