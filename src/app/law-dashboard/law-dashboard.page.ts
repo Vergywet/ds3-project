@@ -11,45 +11,38 @@ export class LawDashboardPage implements OnInit {
 
   menuItems = [
     {
-      icon: 'mail-outline',
-      title: 'Received Incident Report',
-      description: 'Review and manage incoming incident reports',
+      icon: 'document-text-outline',
+      title: 'Received Reports',
+      description: 'Monitor and control drone operations',
       color: 'primary',
       route: '/received-reports'
     },
     {
-      icon: 'warning-outline',
-      title: 'Threats Overview',
-      description: 'Monitor and assess current threats',
-      color: 'primary',
-      route: '/threats-overview'
+      icon: 'shield-outline',
+      title: 'Threats Detected',
+      description: 'Monitor detected suspicious activities',
+      color: 'danger',
+      route: '/threats-detected'
     },
     {
-      icon: 'chatbubble-ellipses-outline',
+      icon: 'chatbox-ellipses-outline',
       title: 'Communicate with Security',
-      description: 'Send messages and alerts to security personnel',
-      color: 'primary',
+      description: 'Send updates or urgent requests',
+      color: 'tertiary',
       route: '/law-comms'
     },
     {
-      icon: 'notifications-outline',
-      title: 'Alerts Overview',
-      description: 'View active and past alerts',
-      color: 'primary',
-      route: '/alerts-overview'
-    },
-    {
-      icon: 'time-outline',
-      title: 'History',
-      description: 'Access historical incident and alert data',
-      color: 'primary',
-      route: '/history'
+      icon: 'bar-chart-outline',
+      title: 'Generate Reports',
+      description: 'Create detailed incident reports',
+      color: 'success',
+      route: '/generate-reports'
     },
     {
       icon: 'settings-outline',
       title: 'System Settings',
-      description: 'Configure system preferences and settings',
-      color: 'primary',
+      description: 'Change language, theme, or preferences',
+      color: 'medium',
       route: '/system-settings'
     }
   ];
