@@ -53,6 +53,10 @@ export class SecurityPersonnelPage implements OnInit {
   navigateTo(item: any) {
     this.router.navigateByUrl(item.route);
   }
+  goToProfile() {
+  this.router.navigateByUrl('/profile');
+}
+
 
   async logout() {
     await this.afAuth.signOut();

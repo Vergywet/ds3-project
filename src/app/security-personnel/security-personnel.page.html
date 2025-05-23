@@ -2,10 +2,19 @@
   <ion-toolbar color="primary">
     <ion-title class="ion-text-center">Security Home</ion-title>
     <ion-buttons slot="end">
-      <ion-button fill="solid" color="danger" (click)="logout()">
-        Logout
-      </ion-button>
-    </ion-buttons>
+  <ion-button id="profile-button">
+    <ion-icon name="person-circle" size= "large" slot="icon-only"></ion-icon>
+  </ion-button>
+  <ion-popover trigger="profile-button" triggerAction="click" showBackdrop="false">
+    <ng-template>
+      <ion-list>
+        <ion-item button (click)="goToProfile()">Profile</ion-item>
+        <ion-item button (click)="logout()">Logout</ion-item>
+      </ion-list>
+    </ng-template>
+  </ion-popover>
+</ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
