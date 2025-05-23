@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Generate Reports</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <!-- Filter Section -->
+  <ion-card class="filter-card">
+    <ion-card-header>
+      <ion-card-title>Filter Reports</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form class="filter-group">
+        <ion-item>
+          <ion-label position="stacked">Start Date</ion-label>
+          <ion-input type="date" [(ngModel)]="filters.startDate" name="startDate"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">End Date</ion-label>
+          <ion-input type="date" [(ngModel)]="filters.endDate" name="endDate"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Incident Type</ion-label>
+          <ion-select [(ngModel)]="filters.incidentType" name="incidentType" interface="popover">
+            <ion-select-option *ngFor="let type of incidentTypes" [value]="type">{{ type }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Location</ion-label>
+          <ion-select [(ngModel)]="filters.location" name="location" interface="popover">
+            <ion-select-option *ngFor="let loc of locations" [value]="loc">{{ loc }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Format</ion-label>
+          <ion-select [(ngModel)]="filters.format" name="format" interface="popover">
+            <ion-select-option *ngFor="let fmt of formats" [value]="fmt">{{ fmt }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-button expand="block" color="primary" class="generate-button" (click)="onGenerateReport()">
+          Generate Report
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Previous Reports -->
+  <ion-card class="previous-reports-list">
+    <ion-card-header>
+      <ion-card-title>Previous Reports</ion-card-title>
+    </ion-card-header>
+    <ion-list>
+      <ion-item *ngFor="let report of reportData" lines="full" detail>
+        <ion-label>{{ report.date }} - {{ report.title }}</ion-label>
+        <ion-icon name="document-outline" slot="end"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <div class="footer">
+    <small>Predictive Minds © 2025</small>
+  </div>
+</ion-content>
