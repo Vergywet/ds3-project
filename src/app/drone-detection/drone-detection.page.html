@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/security-personnel"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Drone Camera Detection System</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="container">
+  <header>
+    Drone Camera Detection System
+  </header>
+
+  <div class="grid">
+    <div class="left-panel">
+      <video #webcam autoplay muted></video>
+      <canvas #canvas style="display: none;"></canvas>
+      <div>
+        <button (click)="startCamera()" [disabled]="isCameraOn">Start Camera</button>
+        <button (click)="stopCamera()" [disabled]="!isCameraOn">Stop Camera</button>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <h2>Detected Objects</h2>
+      <ul>
+        <li *ngFor="let object of detectedObjects">
+          {{ object.class }} ({{ object.score | number:'1.0-1' }}%)
+        </li>
+      </ul>
+
+      <h2>Location Info</h2>
+      <div class="info">
+        <p><strong>Coordinates:</strong> {{ coordinates }}</p>
+        <p><strong>Address:</strong> {{ address }}</p>
+      </div>
+
+      <div id="map" #mapContainer></div>
+    </div>
+  </div>
+</div>

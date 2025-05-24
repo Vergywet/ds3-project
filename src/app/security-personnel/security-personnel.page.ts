@@ -15,7 +15,7 @@ export class SecurityPersonnelPage implements OnInit {
     title: 'Live Feeds & Control Panel',
     description: 'Monitor and control drone operations',
     icon: 'videocam',
-    route: '/live-feeds'
+    route: '/drone-detection'
   },
   {
     title: 'Threats Detected',

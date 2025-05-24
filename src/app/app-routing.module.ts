@@ -85,7 +85,11 @@ const routes: Routes = [
   {
     path: 'generate-reports',
     loadChildren: () => import('./generate-reports/generate-reports.module').then(m => m.GenerateReportsPageModule)
+  },  {
+    path: 'drone-detection',
+    loadChildren: () => import('./drone-detection/drone-detection.module').then( m => m.DroneDetectionPageModule)
   }
+
 ];
 
 
