@@ -27,7 +27,7 @@ export class SecurityPersonnelPage implements OnInit {
     title: 'Communicate with Law Enforcement',
     description: 'Send updates or urgent requests',
     icon: 'call',
-    route: '/communicate'
+    route: '/security-chat?context=professional'
   },
   {
     title: 'Generate Reports',
@@ -51,7 +51,17 @@ export class SecurityPersonnelPage implements OnInit {
   ngOnInit() {}
 
   navigateTo(item: any) {
-    this.router.navigateByUrl(item.route);
+    const [path, queryString] = item.route.split('?');
+    if (queryString) {
+      const queryParams: { [key: string]: string } = {};
+      queryString.split('&').forEach((param: string) => {
+        const [key, value] = param.split('=');
+        queryParams[key] = value;
+      });
+      this.router.navigate([path], { queryParams });
+    } else {
+      this.router.navigateByUrl(item.route);
+    }
   }
   goToProfile() {
   this.router.navigateByUrl('/profile');

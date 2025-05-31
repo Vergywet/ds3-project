@@ -32,7 +32,7 @@
 
   <!-- Messages -->
   <div class="chat-window">
-    <div *ngFor="let msg of messages" [ngClass]="msg.sender === 'self' ? 'msg msg-sent' : 'msg msg-received'">
+    <div *ngFor="let msg of messages" [ngClass]="msg.sender === 'law' ? 'msg msg-sent' : 'msg msg-received'">
       <p>{{ msg.text }}</p>
     </div>
   </div>

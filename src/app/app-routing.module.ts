@@ -7,11 +7,11 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
-    {
-  path: 'system-settings',
-  loadChildren: () =>
-    import('./system-settings/system-settings.module').then(m => m.SystemSettingsPageModule)
- },
+  {
+    path: 'system-settings',
+    loadChildren: () =>
+      import('./system-settings/system-settings.module').then(m => m.SystemSettingsPageModule)
+  },
   {
     path: 'change-password',
     loadChildren: () => import('./change-password/change-password.module').then( m => m.ChangePasswordPageModule)
@@ -60,7 +60,6 @@ const routes: Routes = [
     path: 'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
   },
-   
   {
     path: 'manage-users',
     loadChildren: () => import('./manage-users/manage-users.module').then(m => m.ManageUsersPageModule)
@@ -69,7 +68,6 @@ const routes: Routes = [
     path: 'live-feeds',
     loadChildren: () => import('./live-feeds/live-feeds.module').then( m => m.LiveFeedsPageModule)
   },
-  
   {
     path: 'law-comms',
     loadChildren: () => import('./law-comms/law-comms.module').then(m => m.LawCommsPageModule)
@@ -85,15 +83,16 @@ const routes: Routes = [
   {
     path: 'generate-reports',
     loadChildren: () => import('./generate-reports/generate-reports.module').then(m => m.GenerateReportsPageModule)
-  },  {
+  },
+  {
     path: 'drone-detection',
     loadChildren: () => import('./drone-detection/drone-detection.module').then( m => m.DroneDetectionPageModule)
-  }
+  },  {
+    path: 'security-chat',
+    loadChildren: () => import('./security-chat/security-chat.module').then( m => m.SecurityChatPageModule)
+  },
 
 ];
-
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
