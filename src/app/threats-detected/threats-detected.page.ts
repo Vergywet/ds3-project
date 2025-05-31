@@ -13,7 +13,7 @@ export class ThreatsDetectedPage {
     private alertController: AlertController
   ) {}
 
-  threatData = [
+  threatData: { title: string; location: string; time: string; status: string; statusColor: string; textColor: string; }[] = [
     {
       title: 'Intruder Spotted',
       location: 'Gate 2 - West Entrance',
@@ -53,6 +53,14 @@ export class ThreatsDetectedPage {
   }
 
   async confirmThreat(title: string) {
+    // Update the threat status to Confirmed
+    const threatIndex = this.threatData.findIndex(threat => threat.title === title);
+    if (threatIndex !== -1) {
+      this.threatData[threatIndex].status = 'Confirmed';
+      this.threatData[threatIndex].statusColor = 'success';
+      this.threatData[threatIndex].textColor = '#ffffff';
+    }
+
     const alert = await this.alertController.create({
       header: 'Confirm',
       message: `Confirmed threat: ${title}`,
@@ -62,10 +70,18 @@ export class ThreatsDetectedPage {
   }
 
   async dismissThreat(title: string) {
+    // Remove the threat with the matching title
+    this.threatData = this.threatData.filter((threat) => threat.title !== title);
+
     const alert = await this.alertController.create({
       header: 'Dismiss',
       message: `Dismissed threat: ${title}`,
-      buttons: ['OK'],
+      buttons: [
+        {
+          text: 'OK',
+          role: 'cancel',
+        },
+      ],
     });
     await alert.present();
   }

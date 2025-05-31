@@ -6,43 +6,48 @@
     box-sizing: border-box;
   }
 }
-.icon-center {
-  text-align: center;
-  margin: 24px 0;
-  font-size: 64px;
-}
+
+/* Removed icon-center styles since icon is removed */
 
 .dashboard-card {
   display: flex;
   align-items: center;
-  gap: 12px;
-  box-shadow: 0 2px 8px rgb(255, 255, 255);
-  border-radius: 8px;
+  gap: 16px; /* increased gap for better spacing */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* softer shadow */
+  border-radius: 10px;
+  background-color: #fefefe; /* subtle background */
+  padding: 12px 16px; /* added padding */
   transition: box-shadow 0.3s ease;
+  margin-bottom: 12px; /* spacing between cards */
 }
 
 .dashboard-card:hover {
-  box-shadow: 0 4px 16px rgb(248, 248, 248);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .dashboard-icon {
   font-size: 28px;
+  flex-shrink: 0;
+  color: #2c3e50; /* darker icon color for professionalism */
 }
 
 .dashboard-text h2 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   margin: 0;
+  color: #34495e;
 }
 
 .dashboard-text p {
-  font-size: 13px;
-  color: #ffffff;
+  font-size: 14px;
+  color: #7f8c8d; /* neutral readable color */
   margin-top: 4px;
 }
 
 .footer-text {
   margin-top: 24px;
-  color: #ffffff;
+  color: #95a5a6;
   font-style: italic;
+  font-size: 13px;
+  user-select: none;
 }

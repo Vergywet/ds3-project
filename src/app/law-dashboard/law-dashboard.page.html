@@ -10,10 +10,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div class="icon-center">
-    <ion-icon name="scale-outline" size="large" color="primary"></ion-icon>
-  </div>
-
+  <!-- Removed the middle icon div -->
   <ion-list>
     <ion-card *ngFor="let item of menuItems" (click)="navigateTo(item)">
       <ion-card-content class="dashboard-card">
