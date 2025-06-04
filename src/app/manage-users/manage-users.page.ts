@@ -162,18 +162,6 @@ export class ManageUsersPage implements OnInit {
     await alert.present();
   }
 
-  async logout() {
-    try {
-      await runInInjectionContext(this.injector, async () => {
-        await this.afAuth.signOut();
-        await this.router.navigate(['/login']);
-      });
-    } catch (error) {
-      console.error('Logout error:', error);
-      await this.showAlert('Error', 'Failed to logout');
-    }
-  }
-
   goBack() {
     this.location.back();
   }
