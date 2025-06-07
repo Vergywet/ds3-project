@@ -91,6 +91,14 @@ const routes: Routes = [
     path: 'security-chat',
     loadChildren: () => import('./security-chat/security-chat.module').then( m => m.SecurityChatPageModule)
   },
+  {
+    path: 'driverdashboard',
+    loadChildren: () => import('./driverdashboard/driverdashboard.module').then( m => m.DriverdashboardPageModule)
+  },
+  {
+    path: 'live-feed',
+    loadChildren: () => import('./live-feed/live-feed.module').then( m => m.LiveFeedPageModule)
+  },
 
 ];
 

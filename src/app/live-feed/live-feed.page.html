@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Live Feed</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleCamera()">
+        <ion-icon [name]="isStreaming ? 'videocam-off' : 'videocam'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="video-container">
+    <video #videoElement autoplay muted playsinline></video>
+    <div class="no-feed" *ngIf="!isStreaming">
+      <ion-icon name="videocam-off-outline" size="large"></ion-icon>
+      <p>Camera feed is not active</p>
+    </div>
+  </div>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" color="success" (click)="startCamera()" [disabled]="isStreaming">
+          <ion-icon slot="start" name="videocam-outline"></ion-icon>
+          Start Camera
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" color="danger" (click)="stopCamera()" [disabled]="!isStreaming">
+          <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
+          Stop Camera
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
