@@ -1,9 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button (click)="goBack()">
-        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
-      </ion-button>
     </ion-buttons>
     <ion-title class="ion-text-center">Admin Home</ion-title>
     <ion-buttons slot="end">
@@ -37,9 +34,12 @@
   <ion-list lines="none" class="menu-list">
     <ion-card class="menu-card" button routerLink="/manage-users">
       <ion-card-content class="card-content">
-        <div class="card-left">
-          <h2>Manage Users</h2>
-          <p>Add, edit, delete or lock account.</p>
+        <div class="card-left" style="display:flex; align-items:center; gap:10px;">
+          <ion-icon name="people-outline" color="primary" style="font-size:24px;"></ion-icon>
+          <div>
+            <h2>Manage Users</h2>
+            <p>Add, edit, delete or lock account.</p>
+          </div>
         </div>
         <ion-icon name="chevron-forward-outline" color="medium"></ion-icon>
       </ion-card-content>
@@ -47,9 +47,12 @@
 
     <ion-card class="menu-card" button routerLink="/reports">
       <ion-card-content class="card-content">
-        <div class="card-left">
-          <h2>Manage Reports</h2>
-          <p>View and generate reports.</p>
+        <div class="card-left" style="display:flex; align-items:center; gap:10px;">
+          <ion-icon name="document-text-outline" color="primary" style="font-size:24px;"></ion-icon>
+          <div>
+            <h2>Manage Reports</h2>
+            <p>View and generate reports.</p>
+          </div>
         </div>
         <ion-icon name="chevron-forward-outline" color="medium"></ion-icon>
       </ion-card-content>
@@ -57,9 +60,12 @@
 
     <ion-card class="menu-card" button routerLink="/alerts">
       <ion-card-content class="card-content">
-        <div class="card-left">
-          <h2>Alerts Overview</h2>
-          <p>Review recent threat detections.</p>
+        <div class="card-left" style="display:flex; align-items:center; gap:10px;">
+          <ion-icon name="alert-circle-outline" color="primary" style="font-size:24px;"></ion-icon>
+          <div>
+            <h2>Alerts Overview</h2>
+            <p>Review recent threat detections.</p>
+          </div>
         </div>
         <ion-icon name="chevron-forward-outline" color="medium"></ion-icon>
       </ion-card-content>
@@ -67,15 +73,16 @@
 
     <ion-card class="menu-card" button routerLink="/system-settings">
       <ion-card-content class="card-content">
-        <div class="card-left">
-          <h2>System Settings</h2>
-          <p>Configure system preferences.</p>
+        <div class="card-left" style="display:flex; align-items:center; gap:10px;">
+          <ion-icon name="settings-outline" color="primary" style="font-size:24px;"></ion-icon>
+          <div>
+            <h2>System Settings</h2>
+            <p>Configure system preferences.</p>
+          </div>
         </div>
         <ion-icon name="chevron-forward-outline" color="medium"></ion-icon>
       </ion-card-content>
     </ion-card>
-
-    
   </ion-list>
 
   <div class="footer-text ion-text-center">

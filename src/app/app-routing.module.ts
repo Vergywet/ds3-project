@@ -65,10 +65,6 @@ const routes: Routes = [
     loadChildren: () => import('./manage-users/manage-users.module').then(m => m.ManageUsersPageModule)
   },
   {
-    path: 'live-feeds',
-    loadChildren: () => import('./live-feeds/live-feeds.module').then( m => m.LiveFeedsPageModule)
-  },
-  {
     path: 'law-comms',
     loadChildren: () => import('./law-comms/law-comms.module').then(m => m.LawCommsPageModule)
   },
@@ -87,7 +83,8 @@ const routes: Routes = [
   {
     path: 'drone-detection',
     loadChildren: () => import('./drone-detection/drone-detection.module').then( m => m.DroneDetectionPageModule)
-  },  {
+  },
+  {
     path: 'security-chat',
     loadChildren: () => import('./security-chat/security-chat.module').then( m => m.SecurityChatPageModule)
   },

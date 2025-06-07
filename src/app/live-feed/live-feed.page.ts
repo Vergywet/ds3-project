@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { AlertController, Platform } from '@ionic/angular';
+import { CameraService } from '../services/camera.service';
 
 @Component({
   selector: 'app-live-feed',
@@ -9,32 +10,61 @@ import { AlertController, Platform } from '@ionic/angular';
 })
 export class LiveFeedPage implements OnInit, OnDestroy {
   @ViewChild('videoElement', { static: false }) videoElement!: ElementRef<HTMLVideoElement>;
-  mediaStream: MediaStream | null = null;
-  isStreaming: boolean = false;
+
+  isStreaming: boolean = false; // <-- ADD THIS
+
   private pauseSubscription: any;
+  private resumeSubscription: any;
 
   constructor(
+    private cameraService: CameraService,
     private alertController: AlertController,
     private platform: Platform
   ) {
-    // Handle app state changes
     this.pauseSubscription = this.platform.pause.subscribe(() => {
-      // Keep camera running when app goes to background
-      if (this.isStreaming) {
-        this.keepAlive();
-      }
+      console.log('[LiveFeed] App paused');
+    });
+
+    this.resumeSubscription = this.platform.resume.subscribe(() => {
+      console.log('[LiveFeed] App resumed');
+      this.attachCameraStream();
     });
   }
 
   ngOnInit() {
-    // Start camera when component initializes
-    this.startCamera();
+    this.initCamera();
+  }
+
+  async ionViewWillEnter() {
+    this.attachCameraStream();
+  }
+
+  async initCamera() {
+    const stream = await this.cameraService.startCamera();
+    this.isStreaming = this.cameraService.isCameraRunning(); // <-- UPDATE STATE
+    if (stream) {
+      this.attachCameraStream();
+      await this.keepAlive();
+    } else {
+      await this.showAlert('Camera Error', 'Failed to access camera. Please check permissions.');
+    }
+  }
+
+  attachCameraStream() {
+    const stream = this.cameraService.getStream();
+    if (stream && this.videoElement?.nativeElement) {
+      const video = this.videoElement.nativeElement;
+      video.srcObject = stream;
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+      video.play().catch(err => console.error('Video play error:', err));
+    }
   }
 
   async keepAlive() {
     if ('wakeLock' in navigator) {
       try {
-        // @ts-ignore - Wake Lock API
+        // @ts-ignore
         const wakeLock = await navigator.wakeLock.request('screen');
         wakeLock.addEventListener('release', () => {
           console.log('Wake Lock released');
@@ -45,62 +75,35 @@ export class LiveFeedPage implements OnInit, OnDestroy {
     }
   }
 
+  async toggleCamera() {
+    if (this.cameraService.isCameraRunning()) {
+      this.stopCamera();
+    } else {
+      await this.startCamera();
+    }
+  }
+
   async startCamera() {
-    if (this.isStreaming) return;
-
-    try {
-      const constraints = {
-        video: {
-          width: { ideal: 1280 },
-          height: { ideal: 720 },
-          facingMode: 'environment'
-        },
-        audio: false // Disable audio to save resources
-      };
-
-      this.mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
-      
-      if (this.videoElement?.nativeElement) {
-        this.videoElement.nativeElement.srcObject = this.mediaStream;
-        this.videoElement.nativeElement.play();
-        
-        // Enable background mode
-        this.videoElement.nativeElement.setAttribute('playsinline', '');
-        this.videoElement.nativeElement.setAttribute('webkit-playsinline', '');
-        
-        this.isStreaming = true;
-        await this.keepAlive();
-      }
-    } catch (error) {
-      console.error('Camera access error:', error);
-      await this.showAlert(
-        'Camera Error',
-        'Failed to access camera. Please check permissions.'
-      );
+    const stream = await this.cameraService.startCamera();
+    this.isStreaming = this.cameraService.isCameraRunning(); // <-- UPDATE STATE
+    if (stream) {
+      this.attachCameraStream();
+    } else {
+      await this.showAlert('Camera Error', 'Could not start the camera.');
     }
   }
 
   stopCamera() {
-    if (this.mediaStream) {
-      this.mediaStream.getTracks().forEach(track => {
-        // Don't stop tracks, just mute them
-        track.enabled = false;
-      });
-    }
-    
-    if (this.videoElement?.nativeElement) {
-      // Don't clear srcObject to maintain the stream
-      this.videoElement.nativeElement.pause();
-    }
-    
-    this.isStreaming = false;
+    this.cameraService.stopCamera();
+    this.isStreaming = this.cameraService.isCameraRunning(); // <-- UPDATE STATE
+    this.detachCamera();
   }
 
-  async toggleCamera() {
-    if (this.isStreaming) {
-      this.stopCamera();
-    } else {
-      await this.startCamera();
+  detachCamera() {
+    if (this.videoElement?.nativeElement) {
+      const video = this.videoElement.nativeElement;
+      video.pause();
+      video.srcObject = null;
     }
   }
 
@@ -113,17 +116,11 @@ export class LiveFeedPage implements OnInit, OnDestroy {
     await alert.present();
   }
 
-  // Remove ionViewWillLeave to keep camera running when switching tabs
-
   ngOnDestroy() {
-    // Only cleanup when component is actually destroyed
-    if (this.mediaStream) {
-      this.mediaStream.getTracks().forEach(track => track.stop());
-      this.mediaStream = null;
-    }
-    
-    if (this.pauseSubscription) {
-      this.pauseSubscription.unsubscribe();
-    }
+    this.detachCamera();
+    this.cameraService.stopCamera();
+    if (this.pauseSubscription) this.pauseSubscription.unsubscribe();
+    if (this.resumeSubscription) this.resumeSubscription.unsubscribe();
   }
 }
+

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-system-settings',
@@ -6,27 +7,43 @@ import { Component } from '@angular/core';
   styleUrls: ['./system-settings.page.scss'],
   standalone: false,
 })
-export class SystemSettingsPage {
-  language: string = 'en';  // ✅ Fixes the 'language' error
-  themeMode: 'light' | 'dark' = 'light';  // ✅ Fixes the 'themeMode' error
+export class SystemSettingsPage implements OnInit {
+  language: string = 'en';
+  themeMode: 'light' | 'dark' = 'light';
 
-  constructer() {
-    //load saved theme on page load
-    const saveTheme = localStorage.getItem('themeMode')as 'light' | 'dark';
-    if (saveTheme) {
-      this.themeMode = saveTheme;
-      document.body.classList.toggle('dark', this.themeMode === 'dark');
+  constructor(private location: Location) { // Fixed spelling of 'constructor'
+    this.loadSavedTheme();
+  }
+
+  ngOnInit() {
+    // Initialize any additional settings here
+  }
+
+  private loadSavedTheme() {
+    const savedTheme = localStorage.getItem('themeMode') as 'light' | 'dark';
+    if (savedTheme) {
+      this.themeMode = savedTheme;
+      this.applyTheme(savedTheme);
     }
   }
-  // Method to change the language
+
+  private applyTheme(theme: 'light' | 'dark') {
+    document.body.classList.toggle('dark', theme === 'dark');
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
   changeLanguage(language: string) {
     this.language = language;
-    // Logic to change the app's language can be added here
+    localStorage.setItem('language', language);
+    // Add your language change implementation here
   }
+
   toggleTheme() {
     this.themeMode = this.themeMode === 'light' ? 'dark' : 'light';
-    document.body.classList.toggle('dark', this.themeMode === 'dark');
+    this.applyTheme(this.themeMode);
     localStorage.setItem('themeMode', this.themeMode);
-
   }
 }
