@@ -64,6 +64,11 @@ export class LoginPage implements OnInit {
             case 'Law Enforcement Officer':
               await this.router.navigateByUrl('/law-dashboard', { replaceUrl: true });
               break;
+
+             case 'Driver':
+              await this.router.navigateByUrl('/driverdashboard', { replaceUrl: true });
+              break;
+
             default:
               alert('Unknown role. Please contact the administrator.');
               await this.afAuth.signOut();
