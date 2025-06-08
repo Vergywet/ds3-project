@@ -1,8 +1,24 @@
-<ion-header [translucent]="true">
+<ion-header translucent>
   <ion-toolbar color="primary">
     <ion-title>Driver Home</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="light" (click)="logout()">Logout</ion-button>
+      <ion-button id="profile-trigger">
+        <ion-icon slot="icon-only" name="person-circle-outline" color="light"></ion-icon>
+      </ion-button>
+      <ion-popover trigger="profile-trigger" [dismissOnSelect]="true">
+        <ng-template>
+          <ion-list>
+            <ion-item button (click)="goToProfile()">
+              <ion-icon name="person-outline" slot="start" color="medium"></ion-icon>
+              <ion-label>Profile</ion-label>
+            </ion-item>
+            <ion-item button (click)="logout()" color="danger">
+              <ion-icon name="log-out-outline" slot="start" color="light"></ion-icon>
+              <ion-label color="light">Logout</ion-label>
+            </ion-item>
+          </ion-list>
+        </ng-template>
+      </ion-popover>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -14,13 +30,14 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="app-title">
-    <ion-icon name="car-outline" size="large"></ion-icon>
+  <div class="app-title ion-text-center">
+    <ion-icon name="car-outline" size="large" color="primary"></ion-icon>
     <h2>Secure Transit App</h2>
   </div>
 
   <ion-list>
     <ion-item button (click)="openRoute()">
+      <ion-icon name="map-outline" slot="start" color="primary"></ion-icon>
       <ion-label>
         <h2>Route via Google Maps</h2>
         <p>View and follow your assigned route.</p>
@@ -28,6 +45,7 @@
     </ion-item>
 
     <ion-item button (click)="openLiveFeed()">
+      <ion-icon name="videocam-outline" slot="start" color="primary"></ion-icon>
       <ion-label>
         <h2>Live Video Feed</h2>
         <p>Stream your live surroundings.</p>
@@ -35,6 +53,7 @@
     </ion-item>
 
     <ion-item button (click)="triggerPanic()">
+      <ion-icon name="alert-circle-outline" slot="start" color="primary"></ion-icon>
       <ion-label>
         <h2>Panic Button</h2>
         <p>Tap in case of danger or emergency.</p>
@@ -42,6 +61,7 @@
     </ion-item>
 
     <ion-item button (click)="openChat()">
+      <ion-icon name="chatbubbles-outline" slot="start" color="primary"></ion-icon>
       <ion-label>
         <h2>In-App Communication</h2>
         <p>Talk with Security or Dispatch.</p>

@@ -96,7 +96,7 @@ const routes: Routes = [
     path: 'live-feed',
     loadChildren: () => import('./live-feed/live-feed.module').then( m => m.LiveFeedPageModule)
   },
-
+  
 ];
 
 @NgModule({
