@@ -21,28 +21,28 @@ export class LawDashboardPage implements OnInit {
       icon: 'shield-outline',
       title: 'Threats Detected',
       description: 'Monitor detected suspicious activities',
-      color: 'danger',
+      color: 'primary',
       route: '/threats-detected'
     },
     {
       icon: 'chatbox-ellipses-outline',
       title: 'Communicate with Security',
       description: 'Send updates or urgent requests',
-      color: 'tertiary',
+      color: 'primary',
       route: '/law-comms'
     },
     {
       icon: 'bar-chart-outline',
       title: 'Generate Reports',
       description: 'Create detailed incident reports',
-      color: 'success',
+      color: 'primary',
       route: '/generate-reports'
     },
     {
       icon: 'settings-outline',
       title: 'System Settings',
       description: 'Change language, theme, or preferences',
-      color: 'medium',
+      color: 'primary',
       route: '/system-settings'
     }
   ];

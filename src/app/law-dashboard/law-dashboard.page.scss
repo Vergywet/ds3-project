@@ -28,7 +28,20 @@
 .dashboard-icon {
   font-size: 28px;
   flex-shrink: 0;
-  color: #2c3e50; /* darker icon color for professionalism */
+  color: #007bff; /* changed to blue */
+}
+
+/* Keep top right icons white except profile icon to grey */
+#profile-button ion-icon {
+  color: white !important; /* changed to white */
+}
+
+ion-popover ion-item ion-icon[name="person-outline"] {
+  color: #7f8c8d !important; /* grey color for profile icon inside popover */
+}
+
+ion-popover ion-item ion-icon[name="log-out-outline"] {
+  color: white !important; /* keep logout icon white */
 }
 
 .dashboard-text h2 {

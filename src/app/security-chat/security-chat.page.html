@@ -1,37 +1,34 @@
 <ion-header>
-  <ion-toolbar color="primary" class="custom-toolbar">
-    <ion-buttons slot="start" class="back-button-container">
-      <ion-button (click)="goBack()" class="back-button" fill="clear" size="small" aria-label="Back">
-        <ion-icon slot="icon-only" name="arrow-back-outline" class="back-icon"></ion-icon>
-      </ion-button>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/security-dashboard"></ion-back-button>
     </ion-buttons>
-    <ion-title class="toolbar-title">Security Chat</ion-title>
+    <ion-title>Security Chat</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="chat-content">
+<ion-content [fullscreen]="true" class="ion-padding">
 
-  <div class="chat-box">
-    <div *ngFor="let msg of messages" [ngClass]="msg.sender === 'security' ? 'message sent' : 'message received'">
-      <div class="message-bubble">
-        {{ msg.text }}
-      </div>
+  <!-- Chat Window -->
+  <div class="chat-window">
+    <div *ngFor="let msg of messages" [ngClass]="msg.sender === 'security' ? 'msg msg-sent' : 'msg msg-received'">
+      <p>{{ msg.text }}</p>
     </div>
   </div>
 
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar class="footer-toolbar">
-    <ion-item lines="none" class="footer-item">
-      <ion-input
-        placeholder="Type a message..."
-        [(ngModel)]="newMessage"
-        clearInput
-        class="ion-text-wrap message-input"
-        aria-label="Message input"
-      ></ion-input>
-      <ion-button color="primary" (click)="sendMessage()" class="send-button" aria-label="Send message">Send</ion-button>
-    </ion-item>
-  </ion-toolbar>
+<!-- Footer Chat Input -->
+<ion-footer class="footer-bar">
+  <ion-item class="msg-input" lines="none">
+    <ion-textarea
+      [(ngModel)]="newMessage"
+      placeholder="Type a message..."
+      rows="1"
+      auto-grow="true"
+    ></ion-textarea>
+    <ion-button fill="solid" color="primary" shape="round" (click)="sendMessage()">
+      <ion-icon slot="icon-only" name="send-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
 </ion-footer>
