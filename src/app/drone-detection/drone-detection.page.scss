@@ -96,3 +96,13 @@ ul {
   border: 2px solid #ddd;
   margin-top: 1rem;
 }
+@media (max-width: 768px) {
+  .grid {
+    flex-direction: column;
+  }
+
+  .left-panel, .right-panel {
+    flex: 1 1 100%;
+  }
+}
+

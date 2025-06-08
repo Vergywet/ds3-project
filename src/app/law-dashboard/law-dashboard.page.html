@@ -1,11 +1,26 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Law Enforcement</ion-title>
+    <ion-title class="ion-text-center">Law Enforcement</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="danger" (click)="logout()">
-        Logout
-      </ion-button>
-    </ion-buttons>
+  <ion-button id="profile-button">
+    <ion-icon name="person-circle" size= "large" slot="icon-only"></ion-icon>
+  </ion-button>
+  <ion-popover trigger="profile-button" triggerAction="click" showBackdrop="false">
+    <ng-template>
+      <ion-list>
+       <ion-item button routerLink="/profile">
+              <ion-icon slot="start" name="person-outline"></ion-icon>
+              <ion-label>Profile</ion-label>
+            </ion-item>
+            <ion-item button (click)="logout()" color="danger">
+              <ion-icon slot="start" name="log-out-outline"></ion-icon>
+              <ion-label>Logout</ion-label>
+            </ion-item>
+      </ion-list>
+    </ng-template>
+  </ion-popover>
+</ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 

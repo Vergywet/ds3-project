@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AlertController, NavController } from '@ionic/angular'; // <-- Add this import
 
 @Component({
   selector: 'app-security-personnel',
@@ -45,8 +46,11 @@ export class SecurityPersonnelPage implements OnInit {
 
   constructor(
     private router: Router,
-    private afAuth: AngularFireAuth
-  ) {}
+    private afAuth: AngularFireAuth,
+    private alertCtrl: AlertController, // <-- Add this
+    private navCtrl: NavController      // <-- Add this
+  ) 
+  {}
 
   ngOnInit() {}
 
@@ -63,13 +67,31 @@ export class SecurityPersonnelPage implements OnInit {
       this.router.navigateByUrl(item.route);
     }
   }
-  goToProfile() {
-  this.router.navigateByUrl('/profile');
-}
-
-
-  async logout() {
-    await this.afAuth.signOut();
-    this.router.navigateByUrl('/login', { replaceUrl: true });
+  goToProfile(popover: any) {
+    this.router.navigateByUrl('/profile');
+    popover.dismiss();
   }
+
+   async logout(popover: any) {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirm Logout',
+      message: 'Are you sure you want to log out?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Logout',
+          handler: () => {
+            this.navCtrl.navigateRoot('/login');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+    popover.dismiss();
+  }
+
 }
