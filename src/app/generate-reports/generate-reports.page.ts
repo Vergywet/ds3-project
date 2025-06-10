@@ -16,8 +16,10 @@ export class GenerateReportsPage {
     format: 'PDF',
   };
 
-  incidentTypes = ['All Types', 'Trespassing', 'Vandalism', 'Fire'];
-  locations = ['All Locations', 'Clinic', 'Warehouse'];
+ incidentTypes = ['All Types', 'Trespassing', 'Vandalism', 'Fire', 'Theft', 'Assault', 'Cyber Intrusion', 'Suspicious Activity', 'Equipment Tampering', 'Unauthorized Access', 'Emergency Medical Situation'];
+
+locations = ['All Locations', 'Clinic', 'Warehouse', 'Main Office', 'ATM Facility', 'Security Zone', 'Parking Lot', 'Customer Waiting Area', 'Storage Unit', 'Guard Station'];
+
   formats = ['PDF'];
 
   reportData = [
@@ -84,6 +86,11 @@ export class GenerateReportsPage {
 
   async onGenerateReport() {
     if (!this.validateFilters()) return;
+
+    // Append current report summary to reportData
+    const currentDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const currentTitle = `${this.filters.location} ${this.filters.incidentType} Report`;
+    this.reportData.push({ date: currentDate, title: currentTitle });
 
     if (this.filters.format === 'PDF') {
       const htmlContent = this.generatePDFContent();

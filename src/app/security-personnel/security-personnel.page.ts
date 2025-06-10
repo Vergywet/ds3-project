@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AlertController, NavController } from '@ionic/angular'; // <-- Add this import
+import { AlertController, NavController } from '@ionic/angular';
+import { MessageService } from '../shared/message.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-security-personnel',
@@ -9,7 +11,7 @@ import { AlertController, NavController } from '@ionic/angular'; // <-- Add this
   styleUrls: ['./security-personnel.page.scss'],
   standalone: false,
 })
-export class SecurityPersonnelPage implements OnInit {
+export class SecurityPersonnelPage implements OnInit, OnDestroy {
 
   menuItems = [
   {
@@ -44,15 +46,30 @@ export class SecurityPersonnelPage implements OnInit {
   }
 ];
 
+  private messagesPrefetchSubscription?: Subscription;
+
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
-    private alertCtrl: AlertController, // <-- Add this
-    private navCtrl: NavController      // <-- Add this
+    private alertCtrl: AlertController,
+    private navCtrl: NavController,
+    private messageService: MessageService
   ) 
   {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.prefetchMessages();
+  }
+
+  ngOnDestroy() {
+    if (this.messagesPrefetchSubscription) {
+      this.messagesPrefetchSubscription.unsubscribe();
+    }
+  }
+
+  prefetchMessages() {
+    this.messagesPrefetchSubscription = this.messageService.getMessages().subscribe();
+  }
 
   navigateTo(item: any) {
     const [path, queryString] = item.route.split('?');
