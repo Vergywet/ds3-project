@@ -50,7 +50,7 @@ export class DriverdashboardPage implements OnInit {
       const url = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
       
       // Open in new tab with proper security parameters
-      window.open(url, '_blank', 'noopener,noreferrer');
+      window.location.href = url;
       
     } catch (error) {
       console.error('Location error:', error);
