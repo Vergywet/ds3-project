@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
+import { MessageService } from '../shared/message.service';
+import { Subscription } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-law-dashboard',
@@ -7,7 +11,7 @@ import { NavController, AlertController } from '@ionic/angular';
   styleUrls: ['./law-dashboard.page.scss'],
   standalone:false,
 })
-export class LawDashboardPage implements OnInit {
+export class LawDashboardPage implements OnInit, OnDestroy {
 
   menuItems = [
     {
@@ -47,12 +51,29 @@ export class LawDashboardPage implements OnInit {
     }
   ];
 
+  private messagesPrefetchSubscription?: Subscription;
+
   constructor(
     private navCtrl: NavController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private messageService: MessageService,
+    private afAuth: AngularFireAuth,
+    private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.prefetchMessages();
+  }
+
+  ngOnDestroy() {
+    if (this.messagesPrefetchSubscription) {
+      this.messagesPrefetchSubscription.unsubscribe();
+    }
+  }
+
+  prefetchMessages() {
+    this.messagesPrefetchSubscription = this.messageService.getMessages().subscribe();
+  }
 
   async logout() {
     const alert = await this.alertCtrl.create({

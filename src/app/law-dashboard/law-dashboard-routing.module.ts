@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LawDashboardPage } from './law-dashboard.page';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: LawDashboardPage
+    component: LawDashboardPage,
+    canActivate: [AuthGuard]
   }
 ];
 

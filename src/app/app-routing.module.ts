@@ -95,7 +95,11 @@ const routes: Routes = [
   {
     path: 'live-feed',
     loadChildren: () => import('./live-feed/live-feed.module').then( m => m.LiveFeedPageModule)
+  },  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
+
   
 ];
 
