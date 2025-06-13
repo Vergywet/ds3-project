@@ -3,7 +3,8 @@ import { Location } from '@angular/common';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular'; // <-- Add NavController here
+
 
 interface UserData {
   fullName: string;
@@ -25,11 +26,13 @@ export class AdminDashboardPage implements OnInit {
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private navCtrl: NavController // <-- Inject here
   ) { }
 
   ngOnInit() {
     this.loadUserProfile();
+     this.checkAuthState();
   }
 
   private async loadUserProfile() {
@@ -67,6 +70,9 @@ export class AdminDashboardPage implements OnInit {
   goBack() {
     this.location.back();
   }
+    goToDashboard() {
+    this.navCtrl.navigateRoot('/admin-dashboard');
+  }
 
   async logout() {
     try {
@@ -75,5 +81,25 @@ export class AdminDashboardPage implements OnInit {
     } catch (error) {
       console.error('Logout error:', error);
     }
+  }
+  
+  private async checkAuthState() {
+    try {
+      const user = await this.afAuth.currentUser;
+      if (!user) {
+        await this.router.navigate(['/login']);
+      }
+    } catch (error) {
+      console.error('Auth check error:', error);
+      await this.showAlert('Error', 'Authentication failed');
+    }
+  }
+  private async showAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 }

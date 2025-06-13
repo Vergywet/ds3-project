@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-system-settings',
@@ -11,7 +12,10 @@ export class SystemSettingsPage implements OnInit {
   language: string = 'en';
   themeMode: 'light' | 'dark' = 'light';
 
-  constructor(private location: Location) { // Fixed spelling of 'constructor'
+  constructor(
+    private location: Location,
+    private navCtrl: NavController // Add this if not already injected
+  ) {
     this.loadSavedTheme();
   }
 
@@ -33,6 +37,10 @@ export class SystemSettingsPage implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  goToDashboard() {
+    this.navCtrl.navigateRoot('/admin-dashboard');
   }
 
   changeLanguage(language: string) {

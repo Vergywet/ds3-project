@@ -48,11 +48,14 @@ export class SecurityPersonnelPage implements OnInit {
     private router: Router,
     private afAuth: AngularFireAuth,
     private alertCtrl: AlertController, // <-- Add this
-    private navCtrl: NavController      // <-- Add this
+    private navCtrl: NavController,     // <-- Add this
+    private alertController: AlertController,
   ) 
   {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.checkAuthState();
+  }
 
   navigateTo(item: any) {
     const [path, queryString] = item.route.split('?');
@@ -93,5 +96,23 @@ export class SecurityPersonnelPage implements OnInit {
     await alert.present();
     popover.dismiss();
   }
-
+  private async checkAuthState() {
+    try {
+      const user = await this.afAuth.currentUser;
+      if (!user) {
+        await this.router.navigate(['/login']);
+      }
+    } catch (error) {
+      console.error('Auth check error:', error);
+      await this.showAlert('Error', 'Authentication failed');
+    }
+  }
+  private async showAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
 }
