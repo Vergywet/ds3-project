@@ -40,8 +40,20 @@ export class SystemSettingsPage implements OnInit {
   }
 
   goToDashboard() {
-    this.navCtrl.navigateRoot('/admin-dashboard');
-  }
+  const role = localStorage.getItem('userRole')?.toLowerCase();
+
+if (role === 'admin') {
+  this.navCtrl.navigateRoot('/admin-dashboard');
+} else if (role === 'security personnel') {
+  this.navCtrl.navigateRoot('/security-personnel');
+} else if (role === 'law enforcement officer') {
+  this.navCtrl.navigateRoot('/law-dashboard');
+} else if (role === 'driver') {
+  this.navCtrl.navigateRoot('/driverdashboard');
+}
+
+}
+
 
   changeLanguage(language: string) {
     this.language = language;
