@@ -51,34 +51,17 @@ export class SecurityPersonnelPage implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
-<<<<<<< HEAD
     private alertCtrl: AlertController, // <-- Add this
     private navCtrl: NavController,     // <-- Add this
     private alertController: AlertController,
-=======
-    private alertCtrl: AlertController,
-    private navCtrl: NavController,
-    private messageService: MessageService
->>>>>>> bbc00ad15c8c60b83ff53e2c356ceebd91491bf1
   ) 
   {}
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
 
   ngOnInit() {
-<<<<<<< HEAD
     this.checkAuthState();
-=======
-    this.prefetchMessages();
-  }
-
-  ngOnDestroy() {
-    if (this.messagesPrefetchSubscription) {
-      this.messagesPrefetchSubscription.unsubscribe();
-    }
-  }
-
-  prefetchMessages() {
-    this.messagesPrefetchSubscription = this.messageService.getMessages().subscribe();
->>>>>>> bbc00ad15c8c60b83ff53e2c356ceebd91491bf1
   }
 
   navigateTo(item: any) {
