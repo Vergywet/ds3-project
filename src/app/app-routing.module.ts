@@ -99,6 +99,10 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
+  {
+    path: 'assigned-trip',
+    loadChildren: () => import('./assigned-trip/assigned-trip.module').then( m => m.AssignedTripPageModule)
+  },
 
   
 ];

@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Assigned Trips</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="trips.length > 0">
+    <ion-item *ngFor="let trip of trips">
+      <ion-label>
+        <h2>Destination: {{ trip.destination }}</h2>
+        <p>Time: {{ trip.time }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-text color="medium" *ngIf="trips.length === 0">
+    <p class="ion-padding">No assigned trips found.</p>
+  </ion-text>
+</ion-content>

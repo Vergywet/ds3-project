@@ -128,4 +128,9 @@ export class DriverdashboardPage implements OnInit {
     });
     await alert.present();
   }
+
+  goToAssignedTrips() {
+    // Implement navigation or logic here
+    this.router.navigate(['/assigned-trip']);
+  }
 }
