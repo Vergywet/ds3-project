@@ -13,7 +13,7 @@ export class CameraService {
         video: {
           width: { ideal: 1280 },
           height: { ideal: 720 },
-          facingMode: 'environment'
+          facingMode: 'user'
         },
         audio: false
       };

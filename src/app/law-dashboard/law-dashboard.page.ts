@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NavController, AlertController } from '@ionic/angular';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { NavController, AlertController, IonPopover } from '@ionic/angular';
 import { MessageService } from '../shared/message.service';
 import { Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
   standalone:false,
 })
 export class LawDashboardPage implements OnInit, OnDestroy {
+
+  @ViewChild(IonPopover) popover: IonPopover | undefined;
 
   menuItems = [
     {
@@ -86,7 +88,11 @@ export class LawDashboardPage implements OnInit, OnDestroy {
         },
         {
           text: 'Logout',
-          handler: () => {
+          handler: async () => {
+            if (this.popover) {
+              await this.popover.dismiss();
+            }
+            await this.afAuth.signOut();
             this.navCtrl.navigateRoot('/login');
           }
         }
