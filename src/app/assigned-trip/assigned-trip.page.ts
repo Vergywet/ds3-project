@@ -1,21 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+interface Trip {
+  id: string;
+  vehicle: string;
+  datetime: string;
+  destination: string;
+  status: string;
+}
 
 @Component({
   selector: 'app-assigned-trip',
   templateUrl: './assigned-trip.page.html',
   styleUrls: ['./assigned-trip.page.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [IonicModule, FormsModule, CommonModule]
 })
-export class AssignedTripPage implements OnInit {
-  trips: any[] = []; // Example: array of assigned trips
+export class AssignedTripPage {
+  selectedFilter = 'all';
 
-  constructor() {}
-
-  ngOnInit() {
-    // You can load assigned trips here later
-    this.trips = [
-      { id: 1, destination: 'Downtown', time: '10:00 AM' },
-      { id: 2, destination: 'Airport', time: '1:00 PM' },
-    ];
-  }
+  tripData: Trip[] = [
+    // Example data, replace with your actual data or leave as an empty array
+    // { id: '1', vehicle: 'Car', datetime: '2025-06-13 10:00', destination: 'City Center', status: 'Completed' }
+  ];
 }

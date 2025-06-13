@@ -13,8 +13,8 @@ import { AssignedTripPage } from './assigned-trip.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AssignedTripPageRoutingModule
-  ],
-  declarations: [AssignedTripPage]
+    AssignedTripPageRoutingModule,
+    AssignedTripPage
+  ]
 })
 export class AssignedTripPageModule {}

@@ -1,20 +1,59 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Assigned Trips</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/driverdashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Welcome, Driver John Doe</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list *ngIf="trips.length > 0">
-    <ion-item *ngFor="let trip of trips">
-      <ion-label>
-        <h2>Destination: {{ trip.destination }}</h2>
-        <p>Time: {{ trip.time }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+<ion-content class="ion-padding">
+  <div class="filter-bar">
+    <ion-label>
+      <ion-icon name="filter-outline" class="icon-left"></ion-icon>
+      Filter:
+    </ion-label>
+    <ion-select [(ngModel)]="selectedFilter" interface="popover">
+      <ion-select-option value="all">All Trips</ion-select-option>
+      <ion-select-option value="completed">Completed</ion-select-option>
+      <ion-select-option value="upcoming">Upcoming</ion-select-option>
+      <ion-select-option value="cancelled">Cancelled</ion-select-option>
+    </ion-select>
+  </div>
 
-  <ion-text color="medium" *ngIf="trips.length === 0">
-    <p class="ion-padding">No assigned trips found.</p>
-  </ion-text>
+  <div class="responsive-table">
+    <ion-grid>
+      <ion-row class="table-header">
+        <ion-col><strong>Trip </strong></ion-col>
+        <ion-col><strong>Vehicle</strong></ion-col>
+        <ion-col><strong>Date & Time</strong></ion-col>
+        <ion-col><strong>Destination</strong></ion-col>
+        <ion-col><strong>Status</strong></ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="tripData.length === 0">
+        <ion-col size="12" class="ion-text-center empty-message">
+          No trips found.
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let trip of tripData">
+        <ion-col>{{ trip.id }}</ion-col>
+        <ion-col>{{ trip.vehicle }}</ion-col>
+        <ion-col>{{ trip.datetime }}</ion-col>
+        <ion-col>{{ trip.destination }}</ion-col>
+        <ion-col [ngClass]="{
+          'status-completed': trip.status === 'Completed',
+          'status-upcoming': trip.status === 'Upcoming',
+          'status-cancelled': trip.status === 'Cancelled'
+        }">{{ trip.status }}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>
+
+<style>
+  .table-header ion-col {
+    text-align: center;
+  }
+</style>
