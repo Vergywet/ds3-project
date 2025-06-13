@@ -46,14 +46,17 @@ export class LoginPage implements OnInit {
         if (userData?.role) {
           const role = userData.role;
 
-          // Check if account is locked
+          // ✅ Save role to localStorage so other pages can access it
+          localStorage.setItem('userRole', role.toLowerCase());
+
+          // 🚫 Locked account
           if (role === 'Locked') {
             alert('Your account has been locked');
             await this.afAuth.signOut();
             return;
           }
 
-          // Handle successful login based on role
+          // ✅ Navigate based on role
           switch (role) {
             case 'Admin':
               await this.router.navigateByUrl('/admin-dashboard', { replaceUrl: true });
@@ -64,18 +67,16 @@ export class LoginPage implements OnInit {
             case 'Law Enforcement Officer':
               await this.router.navigateByUrl('/law-dashboard', { replaceUrl: true });
               break;
-
-             case 'Driver':
+            case 'Driver':
               await this.router.navigateByUrl('/driverdashboard', { replaceUrl: true });
               break;
-
             default:
               alert('Unknown role. Please contact the administrator.');
               await this.afAuth.signOut();
               return;
           }
 
-          // Show success message only after navigation
+          // ✅ Success message after navigating
           alert(`Login successful as ${role}`);
         } else {
           alert('User role not found.');
@@ -85,7 +86,6 @@ export class LoginPage implements OnInit {
     } catch (error: any) {
       console.error('Login error:', error);
 
-      // Handle specific error cases
       if (error.code === 'auth/user-not-found') {
         alert('User not found. Please check your email.');
       } else if (error.code === 'auth/wrong-password') {
