@@ -6,25 +6,19 @@ import { CameraService } from '../services/camera.service';
   selector: 'app-live-feed',
   templateUrl: './live-feed.page.html',
   styleUrls: ['./live-feed.page.scss'],
-  standalone: false, // Set to false if this component is part of a module
+  standalone: false,
 })
 export class LiveFeedPage implements OnInit, OnDestroy {
-errorMessage: any;
-onQualityChange() {
-throw new Error('Method not implemented.');
-}
-hasMultipleCameras: any;
-selectedQuality: any;
-switchCamera() {
-throw new Error('Method not implemented.');
-}
   @ViewChild('videoElement', { static: false }) videoElement!: ElementRef<HTMLVideoElement>;
 
-  isStreaming: boolean = false;
+  isStreaming = false;
+  isLoading = false;
+
+  private wakeLock: any = null;
+  private mediaRecorder: MediaRecorder | null = null;
+  private recordedBlobs: Blob[] = [];
   private pauseSubscription: any;
   private resumeSubscription: any;
-  private wakeLock: any = null;
-isLoading: any;
 
   constructor(
     private cameraService: CameraService,
@@ -32,12 +26,10 @@ isLoading: any;
     private platform: Platform
   ) {
     this.pauseSubscription = this.platform.pause.subscribe(() => {
-      console.log('[LiveFeed] App paused');
-      this.releaseWakeLock();
+      this.releaseWakeLock(); // Keep the camera running, just release wake lock
     });
 
     this.resumeSubscription = this.platform.resume.subscribe(() => {
-      console.log('[LiveFeed] App resumed');
       if (this.isStreaming) {
         this.attachCameraStream();
         this.keepAlive();
@@ -46,22 +38,27 @@ isLoading: any;
   }
 
   ngOnInit() {
-    this.initCamera();
+    this.initCamera(); // Auto start live feed and recording
   }
 
   async ionViewWillEnter() {
-    this.attachCameraStream();
+    this.attachCameraStream(); // Re-attach stream if necessary
   }
 
   async initCamera() {
+    this.isLoading = true;
     const stream = await this.cameraService.startCamera();
     this.isStreaming = this.cameraService.isCameraRunning();
+
     if (stream) {
       this.attachCameraStream();
       await this.keepAlive();
+      this.startRecording(); // Start recording automatically
     } else {
       await this.showAlert('Camera Error', 'Failed to access camera. Please check permissions.');
     }
+
+    this.isLoading = false;
   }
 
   attachCameraStream() {
@@ -80,12 +77,11 @@ isLoading: any;
   async keepAlive() {
     if ('wakeLock' in navigator) {
       try {
-        // @ts-ignore: Wake Lock API experimental
+        // @ts-ignore
         this.wakeLock = await navigator.wakeLock.request('screen');
         this.wakeLock.addEventListener('release', () => {
           console.log('Wake Lock released');
         });
-        console.log('Wake Lock active');
       } catch (err) {
         console.error('Wake Lock error:', err);
       }
@@ -97,33 +93,45 @@ isLoading: any;
       if (this.wakeLock) {
         await this.wakeLock.release();
         this.wakeLock = null;
-        console.log('Wake Lock released manually');
       }
     } catch (err) {
       console.error('Error releasing wake lock:', err);
     }
   }
 
-  async toggleCamera() {
-    if (this.cameraService.isCameraRunning()) {
-      this.stopCamera();
-    } else {
-      await this.startCamera();
+  async startRecording() {
+    const stream = this.cameraService.getStream();
+    if (!stream) return;
+
+    try {
+      this.recordedBlobs = [];
+      this.mediaRecorder = new MediaRecorder(stream, {
+        mimeType: 'video/webm;codecs=vp8,opus'
+      });
+
+      this.mediaRecorder.ondataavailable = (event) => {
+        if (event.data && event.data.size > 0) {
+          this.recordedBlobs.push(event.data);
+        }
+      };
+
+      this.mediaRecorder.start();
+      console.log('Recording started...');
+    } catch (err) {
+      console.error('MediaRecorder error:', err);
     }
   }
 
-  async startCamera() {
-    const stream = await this.cameraService.startCamera();
-    this.isStreaming = this.cameraService.isCameraRunning();
-    if (stream) {
-      this.attachCameraStream();
-      await this.keepAlive();
-    } else {
-      await this.showAlert('Camera Error', 'Could not start the camera.');
+  stopRecording() {
+    if (this.mediaRecorder) {
+      this.mediaRecorder.stop();
+      this.mediaRecorder = null;
+      console.log('Recording stopped.');
     }
   }
 
   stopCamera() {
+    this.stopRecording();
     this.cameraService.stopCamera();
     this.detachCamera();
     this.isStreaming = false;
@@ -148,9 +156,7 @@ isLoading: any;
   }
 
   ngOnDestroy() {
-    this.detachCamera();
-    this.cameraService.stopCamera();
-    this.releaseWakeLock();
+    this.stopCamera();
     if (this.pauseSubscription) this.pauseSubscription.unsubscribe();
     if (this.resumeSubscription) this.resumeSubscription.unsubscribe();
   }

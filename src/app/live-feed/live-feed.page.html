@@ -8,79 +8,26 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- Video Container -->
   <div class="video-container">
+    <!-- Live camera video -->
     <video #videoElement autoplay muted playsinline></video>
+
+    <!-- Overlay when camera is not streaming -->
     <div class="no-feed" *ngIf="!isStreaming">
       <ion-icon name="videocam-off-outline" size="large"></ion-icon>
       <p>Camera feed is not active</p>
     </div>
-    
-    <!-- Loading Overlay -->
+
+    <!-- Overlay while initializing camera -->
     <div class="loading-overlay" *ngIf="isLoading">
       <ion-spinner name="circular"></ion-spinner>
       <p>Initializing camera...</p>
     </div>
   </div>
 
-  <!-- Camera Controls -->
-  <ion-grid fixed>
-    <ion-row>
-      <ion-col size="4">
-        <ion-button expand="block" 
-                    color="success" 
-                    (click)="startCamera()" 
-                    [disabled]="isStreaming || isLoading">
-          <ion-icon slot="start" name="videocam-outline"></ion-icon>
-          Start
-        </ion-button>
-      </ion-col>
-
-      <ion-col size="4">
-        <ion-button expand="block" 
-                    (click)="switchCamera()" 
-                    [disabled]="!isStreaming || isLoading || !hasMultipleCameras">
-          <ion-icon slot="icon-only" name="camera-reverse-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-
-      <ion-col size="4">
-        <ion-button expand="block" 
-                    color="danger" 
-                    (click)="stopCamera()" 
-                    [disabled]="!isStreaming || isLoading">
-          <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
-          Stop
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <!-- Quality Controls -->
-  <ion-card class="settings-card">
-    <ion-card-header>
-      <ion-card-title>Stream Settings</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="stacked">Quality</ion-label>
-        <ion-select [(ngModel)]="selectedQuality" 
-                   (ionChange)="onQualityChange()"
-                   [disabled]="isStreaming">
-          <ion-select-option value="high">High (720p)</ion-select-option>
-          <ion-select-option value="medium">Medium (480p)</ion-select-option>
-          <ion-select-option value="low">Low (360p)</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-
-  <!-- Error Alert -->
-  <ion-alert
-    [isOpen]="!!errorMessage"
-    header="Error"
-    [message]="errorMessage"
-    [buttons]="['OK']"
-    (didDismiss)="errorMessage = ''">
-  </ion-alert>
+  <!-- Only Stop Button -->
+  <ion-button expand="block" color="danger" (click)="stopCamera()" [disabled]="!isStreaming || isLoading">
+    <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
+    Stop
+  </ion-button>
 </ion-content>
