@@ -26,23 +26,26 @@ export class LiveFeedPage implements OnInit, OnDestroy {
     private platform: Platform
   ) {
     this.pauseSubscription = this.platform.pause.subscribe(() => {
-      this.releaseWakeLock(); // Keep the camera running, just release wake lock
+      this.releaseWakeLock(); // Release wake lock but keep stream alive
     });
 
     this.resumeSubscription = this.platform.resume.subscribe(() => {
       if (this.isStreaming) {
-        this.attachCameraStream();
+        this.attachCameraStream(); // Reattach stream on app resume
         this.keepAlive();
       }
     });
   }
 
   ngOnInit() {
-    this.initCamera(); // Auto start live feed and recording
+    this.initCamera(); // Auto start camera and recording
   }
 
-  async ionViewWillEnter() {
-    this.attachCameraStream(); // Re-attach stream if necessary
+  // FIXED: Use ionViewDidEnter to rebind stream when returning to tab
+  async ionViewDidEnter() {
+    if (this.isStreaming) {
+      this.attachCameraStream(); // Rebind stream to <video> element
+    }
   }
 
   async initCamera() {
@@ -53,7 +56,7 @@ export class LiveFeedPage implements OnInit, OnDestroy {
     if (stream) {
       this.attachCameraStream();
       await this.keepAlive();
-      this.startRecording(); // Start recording automatically
+      await this.startRecording(); // Auto start recording
     } else {
       await this.showAlert('Camera Error', 'Failed to access camera. Please check permissions.');
     }
