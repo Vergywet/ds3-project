@@ -1,47 +1,51 @@
 <ion-header>
-  <ion-toolbar color="dark">
-    <ion-title>
-      🚨 Cash Transit Admin
-    </ion-title>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/driverdashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Welcome, Driver John Doe</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card>
-    <ion-card-content>
-      <ion-label>Assign a Driver:</ion-label>
-      <ion-select [(ngModel)]="trip.driver" interface="popover" placeholder="Select Driver">
-        <ion-select-option *ngFor="let d of drivers" [value]="d">{{ d }}</ion-select-option>
-      </ion-select>
-    </ion-card-content>
-  </ion-card>
+  <div class="filter-bar">
+    <ion-label>
+      <ion-icon name="filter-outline" class="icon-left"></ion-icon>
+      Filter:
+    </ion-label>
+    <ion-select [(ngModel)]="selectedFilter" interface="popover">
+      <ion-select-option value="all">All Trips</ion-select-option>
+      <ion-select-option value="completed">Completed</ion-select-option>
+      <ion-select-option value="upcoming">Upcoming</ion-select-option>
+      <ion-select-option value="cancelled">Cancelled</ion-select-option>
+    </ion-select>
+  </div>
 
-  <ion-card *ngIf="trip.driver">
-    <ion-card-header>
-      <ion-card-title>🚐 Trip Info for {{ trip.driver }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
+  <div class="responsive-table">
+    <ion-grid>
+      <ion-row class="table-header">
+        <ion-col><strong>Trip</strong></ion-col>
+        <ion-col><strong>Vehicle</strong></ion-col>
+        <ion-col><strong>Vehicle Reg</strong></ion-col> <!-- Added -->
+        <ion-col><strong>Date & Time</strong></ion-col>
+        <ion-col><strong>Destination</strong></ion-col>
+        <ion-col><strong>Status</strong></ion-col>
+      </ion-row>
 
-      <ion-label>Assign a Vehicle:</ion-label>
-      <ion-select [(ngModel)]="trip.vehicle" placeholder="-- Select Vehicle --">
-        <ion-select-option *ngFor="let v of vehicles" [value]="v">{{ v }}</ion-select-option>
-      </ion-select>
+      <ion-row *ngIf="tripData.length === 0">
+        <ion-col size="12" class="ion-text-center empty-message">
+          No trips found.
+        </ion-col>
+      </ion-row>
 
-      <ion-label>🕒 Delivery Time:</ion-label>
-      <ion-datetime display-format="HH:mm" [(ngModel)]="trip.deliveryTime"></ion-datetime>
-
-      <ion-label>🕓 Return Time:</ion-label>
-      <ion-datetime display-format="HH:mm" [(ngModel)]="trip.returnTime"></ion-datetime>
-
-      <ion-label>📍 Checkpoints (4)</ion-label>
-      <div *ngFor="let cp of trip.checkpoints; let i = index">
-        <ion-item>
-          <ion-input [(ngModel)]="cp.name" placeholder="Checkpoint {{ i + 1 }} Name"></ion-input>
-          <ion-input [(ngModel)]="cp.timeToReach" placeholder="Time to reach"></ion-input>
-        </ion-item>
-      </div>
-
-      <ion-button expand="full" color="success" (click)="saveTrip()">✅ Save Trip</ion-button>
-    </ion-card-content>
-  </ion-card>
+      <ion-row *ngFor="let trip of tripData">
+        <ion-col>{{ trip.id }}</ion-col>
+        <ion-col>{{ trip.vehicle }}</ion-col>
+        <ion-col>{{ trip['vehicle-reg'] }}</ion-col> <!-- Added -->
+        <ion-col>{{ trip.datetime }}</ion-col>
+        <ion-col>{{ trip.destination }}</ion-col>
+        <ion-col>{{ trip.status }}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

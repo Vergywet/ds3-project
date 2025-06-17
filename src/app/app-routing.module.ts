@@ -104,7 +104,6 @@ const routes: Routes = [
     path: 'assigned-trip',
     loadChildren: () => import('./assigned-trip/assigned-trip.module').then( m => m.AssignedTripPageModule)
   },
-  
   {
     path: 'trip-scheduling',
     loadChildren: () => import('./trip-scheduling/trip-scheduling.module').then( m => m.TripSchedulingPageModule)
@@ -113,10 +112,12 @@ const routes: Routes = [
     path: 'vehicle-reg',
     loadChildren: () => import('./vehicle-reg/vehicle-reg.module').then( m => m.VehicleRegPageModule)
   },
+ 
   {
-    path: 'driver-reg',
-    loadChildren: () => import('./driver-reg/driver-reg.module').then( m => m.DriverRegPageModule)
+    path: 'assign-trip',
+    loadChildren: () => import('./assign-trip/assign-trip.module').then( m => m.AssignTripPageModule)
   },
+
 
   
 ];

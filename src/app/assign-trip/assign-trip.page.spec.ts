@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DriverRegPage } from './driver-reg.page';
+import { AssignTripPage } from './assign-trip.page';
 
-describe('DriverRegPage', () => {
-  let component: DriverRegPage;
-  let fixture: ComponentFixture<DriverRegPage>;
+describe('AssignTripPage', () => {
+  let component: AssignTripPage;
+  let fixture: ComponentFixture<AssignTripPage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DriverRegPage);
+    fixture = TestBed.createComponent(AssignTripPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
