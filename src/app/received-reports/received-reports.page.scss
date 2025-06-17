@@ -1,50 +1,58 @@
 ion-card {
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  margin-bottom: 18px;
-  transition: box-shadow 0.3s ease;
-  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  margin-bottom: 6px;          /* tight spacing */
+  padding: 6px 8px;            /* minimal padding */
+  background-color: #fff;
+  transition: box-shadow 0.2s ease;
+  min-height: unset;           /* allow shrinking to fit content */
 }
 
 ion-card:hover {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
 ion-card-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 18px;
-  font-weight: 700;
-  color: #0a2540; /* brighter dark blue */
+  font-size: 14px;             /* small but readable */
+  font-weight: 400;            /* normal weight, no bold */
+  color: #0a2540;
+  margin: 0;
+  padding: 2px 0;              /* very little vertical padding */
+  line-height: 1.2;            /* tighter line height */
 }
 
 ion-card-content {
-  font-size: 15px;
-  color: #33475b; /* brighter gray-blue */
+  font-size: 12.5px;           /* smaller content text */
+  color: #33475b;
+  padding-top: 2px;
+  margin-bottom: 0;
+  line-height: 1.2;
 }
 
 ion-badge {
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  padding: 6px 12px;
-  border-radius: 12px;
-  font-size: 13px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-size: 11px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 ion-badge[color="primary"] {
-  background-color: #007bff; /* bright blue */
+  background-color: #007bff;
   color: white;
 }
 
 ion-badge[color="medium"] {
-  background-color: #adb5bd; /* bright neutral gray */
+  background-color: #adb5bd;
   color: #212529;
 }
 
 ion-badge[color="warning"] {
-  background-color: #ffc107; /* bright yellow */
+  background-color: #ffc107;
   color: #212529;
 }
 
@@ -55,22 +63,21 @@ ion-badge[color="dark"] {
 
 ion-searchbar {
   --background: #e9f0fb;
-  --box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-  --border-radius: 16px;
-  margin-bottom: 24px;
-  font-size: 16px;
+  --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  --border-radius: 12px;
+  margin-bottom: 14px;
+  font-size: 14px;
   color: #0a2540;
 }
 
 ion-footer {
-  font-size: 13px;
+  font-size: 12px;
   color: #495057;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  margin-top: 48px;
+  font-weight: 500;
+  margin-top: 24px;
 }
 
 ion-toolbar[color="primary"] {
-  --background: #0056b3; /* deeper bright blue */
+  --background: #0056b3;
   --color: #ffffff;
 }
