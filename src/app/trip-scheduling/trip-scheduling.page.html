@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>
+      🚨 Cash Transit Admin
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-content>
+      <ion-label>Assign a Driver:</ion-label>
+      <ion-select [(ngModel)]="trip.driver" interface="popover" placeholder="Select Driver">
+        <ion-select-option *ngFor="let d of drivers" [value]="d">{{ d }}</ion-select-option>
+      </ion-select>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="trip.driver">
+    <ion-card-header>
+      <ion-card-title>🚐 Trip Info for {{ trip.driver }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-label>Assign a Vehicle:</ion-label>
+      <ion-select [(ngModel)]="trip.vehicle" placeholder="-- Select Vehicle --">
+        <ion-select-option *ngFor="let v of vehicles" [value]="v">{{ v }}</ion-select-option>
+      </ion-select>
+
+      <ion-label>🕒 Delivery Time:</ion-label>
+      <ion-datetime display-format="HH:mm" [(ngModel)]="trip.deliveryTime"></ion-datetime>
+
+      <ion-label>🕓 Return Time:</ion-label>
+      <ion-datetime display-format="HH:mm" [(ngModel)]="trip.returnTime"></ion-datetime>
+
+      <ion-label>📍 Checkpoints (4)</ion-label>
+      <div *ngFor="let cp of trip.checkpoints; let i = index">
+        <ion-item>
+          <ion-input [(ngModel)]="cp.name" placeholder="Checkpoint {{ i + 1 }} Name"></ion-input>
+          <ion-input [(ngModel)]="cp.timeToReach" placeholder="Time to reach"></ion-input>
+        </ion-item>
+      </div>
+
+      <ion-button expand="full" color="success" (click)="saveTrip()">✅ Save Trip</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

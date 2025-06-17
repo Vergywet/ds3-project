@@ -107,6 +107,18 @@ const routes: Routes = [
     path: 'trips',
     loadChildren: () => import('./trips/trips.module').then( m => m.TripsPageModule)
   },
+  {
+    path: 'trip-scheduling',
+    loadChildren: () => import('./trip-scheduling/trip-scheduling.module').then( m => m.TripSchedulingPageModule)
+  },
+  {
+    path: 'vehicle-reg',
+    loadChildren: () => import('./vehicle-reg/vehicle-reg.module').then( m => m.VehicleRegPageModule)
+  },
+  {
+    path: 'driver-reg',
+    loadChildren: () => import('./driver-reg/driver-reg.module').then( m => m.DriverRegPageModule)
+  },
 
   
 ];

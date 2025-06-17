@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>🚚 Vehicle Registration (Admin)</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Register New Vehicle</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-input label="Vehicle Name / Model" [(ngModel)]="vehicle.name" placeholder="Enter vehicle name/model"></ion-input>
+      <ion-input label="Registration Number" [(ngModel)]="vehicle.registrationNumber" placeholder="Enter registration number"></ion-input>
+
+      <ion-label>Vehicle Type</ion-label>
+      <ion-select [(ngModel)]="vehicle.type" placeholder="Select Type">
+        <ion-select-option value="Van">Van</ion-select-option>
+        <ion-select-option value="Truck">Truck</ion-select-option>
+        <ion-select-option value="Armored Vehicle">Armored Vehicle</ion-select-option>
+      </ion-select>
+
+      <ion-input label="Capacity (e.g. Cash Bags)" [(ngModel)]="vehicle.capacity" placeholder="Enter capacity"></ion-input>
+
+      
+
+      <ion-label>Status</ion-label>
+      <ion-select [(ngModel)]="vehicle.status" placeholder="Select Status">
+        <ion-select-option value="Active">Active</ion-select-option>
+        <ion-select-option value="Inactive">Inactive</ion-select-option>
+        <ion-select-option value="Under Maintenance">Under Maintenance</ion-select-option>
+      </ion-select>
+
+      <ion-button expand="full" color="success" (click)="registerVehicle()">Register Vehicle</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
