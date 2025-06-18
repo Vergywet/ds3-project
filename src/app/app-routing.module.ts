@@ -104,6 +104,10 @@ const routes: Routes = [
     path: 'assigned-trip',
     loadChildren: () => import('./assigned-trip/assigned-trip.module').then( m => m.AssignedTripPageModule)
   },
+  {
+    path: 'vehicle-reg',
+    loadChildren: () => import('./vehicle-reg/vehicle-reg.module').then(m => m.VehicleRegPageModule)
+  },
 
 ];
 
