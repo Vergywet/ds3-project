@@ -8,23 +8,23 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" [scrollEvents]="true" keyboardResizes="true">
-  <div class="chat-window">
-    <div *ngFor="let msg of messages" [ngClass]="msg.sender === 'law' ? 'msg msg-sent' : 'msg msg-received'">
+  <div class="chat-container">
+    <div class="message-bubble" *ngFor="let msg of messages" [ngClass]="msg.sender === 'law' ? 'sent' : 'received'">
       <p>{{ msg.text }}</p>
     </div>
   </div>
 </ion-content>
 
-<ion-footer class="footer-bar">
-  <ion-item class="msg-input" lines="none">
+<ion-footer class="chat-footer">
+  <div class="input-wrapper">
     <ion-textarea
       [(ngModel)]="inputMessage"
       placeholder="Type a message..."
-      rows="1"
       auto-grow="true"
+      rows="1"
     ></ion-textarea>
-    <ion-button fill="solid" color="primary" shape="round" (click)="sendMessage()">
+    <ion-button color="primary" shape="round" (click)="sendMessage()">
       <ion-icon slot="icon-only" name="send-outline"></ion-icon>
     </ion-button>
-  </ion-item>
+  </div>
 </ion-footer>
