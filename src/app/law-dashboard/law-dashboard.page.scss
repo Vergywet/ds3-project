@@ -7,67 +7,77 @@
   }
 }
 
-/* Removed icon-center styles since icon is removed */
+.dashboard-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;  /* reduced gap for tighter spacing */
+}
 
 .dashboard-card {
   display: flex;
   align-items: center;
-  gap: 16px; /* increased gap for better spacing */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* softer shadow */
+  justify-content: space-between;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
-  background-color: #fefefe; /* subtle background */
-  padding: 12px 16px; /* added padding */
+  background-color: #fefefe;
+  padding: 8px 12px;  /* reduced padding to make card smaller */
   transition: box-shadow 0.3s ease;
-  margin-bottom: 12px; /* spacing between cards */
 }
 
 .dashboard-card:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .dashboard-icon {
-  font-size: 28px;
+  font-size: 26px;
+  color: #007bff;
+  margin-right: 14px;
   flex-shrink: 0;
-  color: #007bff; /* changed to blue */
 }
 
-/* Keep top right icons white except profile icon to grey */
-#profile-button ion-icon {
-  color: white !important; /* changed to white */
-}
-
-ion-popover ion-item ion-icon[name="person-outline"] {
-  color: #7f8c8d !important; /* grey color for profile icon inside popover */
-}
-
-ion-popover ion-item ion-icon[name="log-out-outline"] {
-  color: white !important; /* keep logout icon white */
+.dashboard-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .dashboard-text h2 {
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 500; /* No bold */
   margin: 0;
   color: #34495e;
+  text-align: left;
 }
 
 .dashboard-text p {
-  font-size: 14px;
-  color: #7f8c8d; /* neutral readable color */
+  font-size: 13px;
+  color: #7f8c8d;
   margin-top: 4px;
+  text-align: left;
+}
+
+.arrow-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+#profile-button ion-icon {
+  color: white !important;
+}
+
+ion-popover ion-item ion-icon[name="person-outline"] {
+  color: #7f8c8d !important;
+}
+
+ion-popover ion-item ion-icon[name="log-out-outline"] {
+  color: white !important;
 }
 
 .footer-text {
-  margin-top: 24px;
+  margin-top: 20px;
   color: #95a5a6;
   font-style: italic;
   font-size: 13px;
   user-select: none;
-}
-
-/* Remove dark lines between menu items */
-ion-list {
-  --ion-item-border-width: 0 !important;
-  --ion-item-border-style: none !important;
-  --ion-item-border-color: transparent !important;
 }

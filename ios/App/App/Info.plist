@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>DS3_Project</string>
+	<string>DS3_Project</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -30,6 +30,20 @@
 	<array>
 		<string>armv7</string>
 	</array>
+
+	<!--  CAMERA PERMISSIONS -->
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera to capture pictures or video.</string>
+
+	<!--  MICROPHONE PERMISSIONS -->
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app requires access to the microphone for recording audio.</string>
+
+	<!--  PHOTO LIBRARY SAVE PERMISSIONS (Optional but recommended) -->
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app requires access to save photos and videos to your photo library.</string>
+
+	<!--  INTERFACE ORIENTATIONS -->
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -43,6 +57,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 </dict>

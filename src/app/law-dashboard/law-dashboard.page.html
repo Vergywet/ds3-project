@@ -2,13 +2,13 @@
   <ion-toolbar color="primary">
     <ion-title class="ion-text-center">Law Enforcement</ion-title>
     <ion-buttons slot="end">
-  <ion-button id="profile-button">
-    <ion-icon name="person-circle" size= "large" slot="icon-only"></ion-icon>
-  </ion-button>
-  <ion-popover trigger="profile-button" triggerAction="click" showBackdrop="false">
-    <ng-template>
-      <ion-list>
-       <ion-item button routerLink="/profile">
+      <ion-button id="profile-button">
+        <ion-icon name="person-circle" size="large" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-popover trigger="profile-button" triggerAction="click" showBackdrop="false">
+        <ng-template>
+          <ion-list>
+            <ion-item button routerLink="/profile">
               <ion-icon slot="start" name="person-outline"></ion-icon>
               <ion-label>Profile</ion-label>
             </ion-item>
@@ -16,17 +16,15 @@
               <ion-icon slot="start" name="log-out-outline"></ion-icon>
               <ion-label>Logout</ion-label>
             </ion-item>
-      </ion-list>
-    </ng-template>
-  </ion-popover>
-</ion-buttons>
-
+          </ion-list>
+        </ng-template>
+      </ion-popover>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <!-- Removed the middle icon div -->
-  <ion-list>
+  <div class="dashboard-card-container">
     <ion-card *ngFor="let item of menuItems" (click)="navigateTo(item)">
       <ion-card-content class="dashboard-card">
         <ion-icon [name]="item.icon" [color]="item.color" class="dashboard-icon"></ion-icon>
@@ -34,10 +32,10 @@
           <h2>{{ item.title }}</h2>
           <p>{{ item.description }}</p>
         </div>
-        <ion-icon name="chevron-forward-outline" color="medium"></ion-icon>
+        <ion-icon name="chevron-forward-outline" color="medium" class="arrow-icon"></ion-icon>
       </ion-card-content>
     </ion-card>
-  </ion-list>
+  </div>
 
   <div class="footer-text ion-text-center">
     <small>Predictive Minds © 2025</small>

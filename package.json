@@ -1,5 +1,5 @@
 {
-  "name": "DS3_Project",
+  "name": "ds3-project",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -9,7 +9,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "ionic:serve:external": "ionic serve --external"
   },
   "private": true,
   "dependencies": {

@@ -1,6 +1,9 @@
 {
   "recommendations": [
+<<<<<<< HEAD
     "Webnative.webnative",
+=======
+>>>>>>> eafac0a8c9c3fdeccb1bdea9682fab52053ca812
     "Webnative.webnative"
   ]
 }

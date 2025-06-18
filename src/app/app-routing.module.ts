@@ -104,11 +104,7 @@ const routes: Routes = [
     path: 'assigned-trip',
     loadChildren: () => import('./assigned-trip/assigned-trip.module').then( m => m.AssignedTripPageModule)
   },
- 
 
-
-
-  
 ];
 
 @NgModule({

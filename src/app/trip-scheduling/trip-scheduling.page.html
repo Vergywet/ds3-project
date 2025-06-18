@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/driverdashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Welcome, Driver John Doe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="filter-bar">
+    <ion-label>
+      <ion-icon name="filter-outline" class="icon-left"></ion-icon>
+      Filter:
+    </ion-label>
+    <ion-select [(ngModel)]="selectedFilter" interface="popover">
+      <ion-select-option value="all">All Trips</ion-select-option>
+      <ion-select-option value="completed">Completed</ion-select-option>
+      <ion-select-option value="upcoming">Upcoming</ion-select-option>
+      <ion-select-option value="cancelled">Cancelled</ion-select-option>
+    </ion-select>
+  </div>
+
+  <div class="responsive-table">
+    <ion-grid>
+      <ion-row class="table-header">
+        <ion-col><strong>Trip</strong></ion-col>
+        <ion-col><strong>Vehicle</strong></ion-col>
+        <ion-col><strong>Vehicle Reg</strong></ion-col> <!-- Added -->
+        <ion-col><strong>Date & Time</strong></ion-col>
+        <ion-col><strong>Destination</strong></ion-col>
+        <ion-col><strong>Status</strong></ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="tripData.length === 0">
+        <ion-col size="12" class="ion-text-center empty-message">
+          No trips found.
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let trip of tripData">
+        <ion-col>{{ trip.id }}</ion-col>
+        <ion-col>{{ trip.vehicle }}</ion-col>
+        <ion-col>{{ trip['vehicle-reg'] }}</ion-col> <!-- Added -->
+        <ion-col>{{ trip.datetime }}</ion-col>
+        <ion-col>{{ trip.destination }}</ion-col>
+        <ion-col>{{ trip.status }}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

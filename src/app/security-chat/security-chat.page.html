@@ -7,18 +7,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-
-  <!-- Chat Window -->
+<ion-content [fullscreen]="true" [scrollEvents]="true" keyboardResizes="true">
   <div class="chat-window">
     <div *ngFor="let msg of messages" [ngClass]="msg.sender === 'security' ? 'msg msg-sent' : 'msg msg-received'">
       <p>{{ msg.text }}</p>
     </div>
   </div>
-
 </ion-content>
 
-<!-- Footer Chat Input -->
 <ion-footer class="footer-bar">
   <ion-item class="msg-input" lines="none">
     <ion-textarea

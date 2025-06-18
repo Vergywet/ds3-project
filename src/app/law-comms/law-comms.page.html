@@ -3,16 +3,11 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/law-dashboard"></ion-back-button>
     </ion-buttons>
-    <ion-title> Law Officer Chat</ion-title>
+    <ion-title>Law Officer Chat</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-
-  <!-- Officer Card -->
-  
-
-  <!-- Messages -->
+<ion-content [fullscreen]="true" [scrollEvents]="true" keyboardResizes="true">
   <div class="chat-window">
     <div *ngFor="let msg of messages" [ngClass]="msg.sender === 'law' ? 'msg msg-sent' : 'msg msg-received'">
       <p>{{ msg.text }}</p>
@@ -20,7 +15,6 @@
   </div>
 </ion-content>
 
-<!-- Footer Input -->
 <ion-footer class="footer-bar">
   <ion-item class="msg-input" lines="none">
     <ion-textarea
