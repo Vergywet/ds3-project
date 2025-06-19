@@ -11,6 +11,7 @@
   <div class="chat-window">
     <div *ngFor="let msg of messages" [ngClass]="msg.sender === 'security' ? 'msg msg-sent' : 'msg msg-received'">
       <p>{{ msg.text }}</p>
+      <span class="time">{{ formatTime(msg.timestamp) }}</span>
     </div>
   </div>
 </ion-content>

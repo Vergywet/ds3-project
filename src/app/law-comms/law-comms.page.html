@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header> 
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/law-dashboard"></ion-back-button>
@@ -7,10 +7,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" [scrollEvents]="true" keyboardResizes="true">
+<ion-content [fullscreen]="true" [scrollEvents]="true" keyboardResizes="true" class="chat-content">
   <div class="chat-container">
-    <div class="message-bubble" *ngFor="let msg of messages" [ngClass]="msg.sender === 'law' ? 'sent' : 'received'">
+    <div
+      class="message-bubble"
+      *ngFor="let msg of messages"
+      [ngClass]="msg.sender === 'law' ? 'sent' : 'received'">
       <p>{{ msg.text }}</p>
+      <span class="time">{{ formatTime(msg.timestamp) }}</span>
     </div>
   </div>
 </ion-content>
